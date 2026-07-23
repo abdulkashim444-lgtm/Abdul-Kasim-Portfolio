@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "motion/react";
+import { motion, useScroll, useSpring, useTransform, AnimatePresence, useReducedMotion, type Variants } from "motion/react";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight, Download, Github, Linkedin, Mail, MapPin, ExternalLink,
@@ -891,17 +891,70 @@ function ContactForm() {
 }
 
 function Contact() {
+  const prefersReducedMotion = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
+
+  const container: Variants = {
+    hidden: {},
+    show: {
+      transition: prefersReducedMotion
+        ? { staggerChildren: 0 }
+        : { staggerChildren: 0.09, delayChildren: 0.05 },
+    },
+  };
+  const rise: Variants = {
+    hidden: prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 24, filter: "blur(6px)" },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: prefersReducedMotion ? 0.001 : 0.7, ease },
+    },
+  };
+  const fromLeft: Variants = {
+    hidden: prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -40 },
+    show: { opacity: 1, x: 0, transition: { duration: prefersReducedMotion ? 0.001 : 0.75, ease } },
+  };
+  const fromRight: Variants = {
+    hidden: prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: 40 },
+    show: { opacity: 1, x: 0, transition: { duration: prefersReducedMotion ? 0.001 : 0.75, ease } },
+  };
+
   return (
     <section id="contact" className="pt-28 pb-0 relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="max-w-7xl mx-auto px-6 relative">
+      {!prefersReducedMotion && (
+        <motion.div
+          aria-hidden
+          className="absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full bg-accent/10 blur-[140px] pointer-events-none"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.2, ease }}
+        />
+      )}
+      <motion.div
+        className="max-w-7xl mx-auto px-6 relative"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
+      >
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Let's Connect.</h2>
-            <p className="text-muted-foreground text-lg leading-relaxed max-w-md">
+          <motion.div variants={fromLeft}>
+            <motion.h2 variants={rise} className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+              Let's Connect.
+            </motion.h2>
+            <motion.p variants={rise} className="text-muted-foreground text-lg leading-relaxed max-w-md">
               I'm currently looking for new opportunities and collaborations. Whether you have a question or just want to say hi, I'll try my best to get back to you!
-            </p>
-            <a href="mailto:abdulkashim444@gmail.com" className="mt-10 flex items-center gap-4 group w-fit">
+            </motion.p>
+            <motion.a
+              variants={rise}
+              href="mailto:abdulkashim444@gmail.com"
+              className="mt-10 flex items-center gap-4 group w-fit"
+              whileHover={prefersReducedMotion ? undefined : { x: 4 }}
+              transition={{ duration: 0.3, ease }}
+            >
               <span className="w-12 h-12 rounded-xl bg-accent/15 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
                 <Mail size={20} />
               </span>
@@ -909,26 +962,38 @@ function Contact() {
                 <div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">Email me</div>
                 <div className="font-semibold">abdulkashim444@gmail.com</div>
               </span>
-            </a>
-            <div className="mt-8 flex items-center gap-3">
+            </motion.a>
+            <motion.div variants={rise} className="mt-8 flex items-center gap-3">
               {[
                 { href: "https://github.com/abdulkashim444-lgtm", label: "GitHub", icon: Github },
                 { href: "https://www.linkedin.com/in/abdul-kashim-567984332", label: "LinkedIn", icon: Linkedin },
                 { href: "https://instagram.com/", label: "Instagram", icon: Instagram },
-              ].map(({ href, label, icon: Icon }) => (
-                <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
-                  className="w-11 h-11 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors">
+              ].map(({ href, label, icon: Icon }, i) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="w-11 h-11 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/50 transition-colors"
+                  initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: prefersReducedMotion ? 0.001 : 0.5, ease, delay: prefersReducedMotion ? 0 : 0.4 + i * 0.08 }}
+                  whileHover={prefersReducedMotion ? undefined : { y: -3, scale: 1.05 }}
+                  whileTap={prefersReducedMotion ? undefined : { scale: 0.96 }}
+                >
                   <Icon size={18} />
-                </a>
+                </motion.a>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="glass rounded-3xl p-6 md:p-10">
+          <motion.div variants={fromRight} className="glass rounded-3xl p-6 md:p-10">
             <ContactForm />
           </motion.div>
         </div>
+
 
         <footer className="mt-24 py-8 border-t border-border-soft grid gap-4 md:grid-cols-3 items-center text-sm text-muted-foreground">
           <div>
@@ -945,7 +1010,7 @@ function Contact() {
             Designed &amp; Developed with <Heart size={14} className="inline text-accent fill-accent -mt-0.5" /> by Abdul Kashim
           </div>
         </footer>
-      </div>
+      </motion.div>
     </section>
   );
 }
