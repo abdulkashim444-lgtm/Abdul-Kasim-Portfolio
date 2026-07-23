@@ -66,9 +66,11 @@ export function ChatBot() {
         body: JSON.stringify({ messages: next.map(({ role, content }) => ({ role, content })) }),
       });
       const data = (await res.json()) as { reply?: string; error?: string };
+      const raw = data.reply ?? data.error ?? "Something went wrong.";
+      const { content, sources } = extractSources(raw);
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: data.reply ?? data.error ?? "Something went wrong.", time: nowLabel() },
+        { role: "assistant", content, sources, time: nowLabel() },
       ]);
     } catch {
       setMessages((m) => [...m, { role: "assistant", content: "Network error — please try again.", time: nowLabel() }]);
