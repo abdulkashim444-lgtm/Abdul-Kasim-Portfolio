@@ -1010,7 +1010,7 @@ function Contact() {
             Designed &amp; Developed with <Heart size={14} className="inline text-accent fill-accent -mt-0.5" /> by Abdul Kashim
           </div>
         </footer>
-      </div>
+      </motion.div>
     </section>
   );
 }
