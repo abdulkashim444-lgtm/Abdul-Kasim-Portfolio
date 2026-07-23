@@ -203,7 +203,7 @@ export function ChatBot() {
                 </button>
               </div>
               <div className="text-[10px] text-muted-foreground/70 mt-1.5 text-center">
-                Powered by Lovable AI • {input.length}/1000
+                Powered by Abdul Kasim • {input.length}/1000
               </div>
             </form>
           </motion.div>
