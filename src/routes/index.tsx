@@ -1,12 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight, Download, Github, Linkedin, Mail, MapPin, ExternalLink,
   Terminal, Code2, Cpu, Trophy, Briefcase, Calendar, X, Award, ShieldCheck,
-  Layout, Server, Brain, BarChart, Database, Sparkles, CheckCircle2,
+  Layout, Server, Brain, BarChart, Database, Sparkles, CheckCircle2, LifeBuoy, Send, Loader2,
 } from "lucide-react";
+import { z } from "zod";
+import { Toaster, toast } from "sonner";
 import profileImg from "@/assets/profile.jpg";
+
+const RESUME_URL = "/ABDUL_KASHIM_Updated_Resume.pdf";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
