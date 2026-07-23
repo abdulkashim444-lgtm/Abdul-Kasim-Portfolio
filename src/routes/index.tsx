@@ -134,24 +134,6 @@ const PROJECTS: Project[] = [
     year: "2026",
   },
   {
-    title: "Modern SaaS Landing Platform",
-    category: "Full Stack",
-    description: "Polished, performant marketing site with CMS-driven content and auth.",
-    longDescription:
-      "A production SaaS front-door: server-rendered React, edge-deployed APIs, CMS-driven content blocks, and integrated authentication — hitting perfect Lighthouse scores.",
-    highlights: [
-      "SSR React on the edge",
-      "100/100 Lighthouse performance",
-      "Auth + billing-ready architecture",
-      "Composable CMS content blocks",
-    ],
-    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=1200",
-    tech: ["React", "TypeScript", "Node.js", "Tailwind"],
-    github: "#",
-    live: "#",
-    year: "2026",
-  },
-  {
     title: "Kafka Event Streaming Service",
     category: "Full Stack",
     description: "Simulated production backend with Kafka streams and REST integrations.",
