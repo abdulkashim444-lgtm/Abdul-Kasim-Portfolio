@@ -10,6 +10,8 @@ import {
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
 import profileAsset from "@/assets/profile.png.asset.json";
+import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
+import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
 
 const RESUME_URL = "/ABDUL_KASHIM_Updated_Resume.pdf";
 
@@ -89,7 +91,7 @@ const PROJECTS: Project[] = [
       "PostgreSQL warehouse with partitioning",
       "Role-based access and shareable reports",
     ],
-    image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=1200",
+    image: analyticsDashboardImg,
     tech: ["Python", "Pandas", "D3.js", "React", "PostgreSQL"],
     github: "#",
     live: "#",
@@ -107,7 +109,7 @@ const PROJECTS: Project[] = [
       "Custom-trained on domain dataset",
       "Live annotated web viewer",
     ],
-    image: "https://images.unsplash.com/photo-1527430253228-e92688e1ad3a?auto=format&fit=crop&q=80&w=1200",
+    image: cvObjectDetectionImg,
     tech: ["YOLOv8", "TensorRT", "OpenCV", "Python", "React"],
     github: "https://github.com/abdulkashim444-lgtm/Computer-Vision-Object-Detection-System",
     live: "#",
