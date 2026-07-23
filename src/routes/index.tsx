@@ -331,6 +331,16 @@ function Nav() {
                 </a>
               </li>
             ))}
+            <li className="pt-1">
+              <a
+                onClick={() => setOpen(false)}
+                href={RESUME_URL}
+                download
+                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-accent text-accent-foreground text-sm font-medium"
+              >
+                <Download size={16} /> Download Resume
+              </a>
+            </li>
           </motion.ul>
         )}
       </AnimatePresence>
