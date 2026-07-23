@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "motion/react";
+import { motion, useScroll, useSpring, useTransform, AnimatePresence, useReducedMotion, type Variants } from "motion/react";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight, Download, Github, Linkedin, Mail, MapPin, ExternalLink,
