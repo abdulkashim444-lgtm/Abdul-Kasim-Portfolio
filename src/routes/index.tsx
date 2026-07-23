@@ -10,6 +10,8 @@ import {
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
 import profileAsset from "@/assets/profile.png.asset.json";
+import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
+import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
 
 const RESUME_URL = "/ABDUL_KASHIM_Updated_Resume.pdf";
 
