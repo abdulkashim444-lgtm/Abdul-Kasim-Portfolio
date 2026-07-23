@@ -14,7 +14,7 @@ import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
 import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
 import { ChatBot } from "@/components/ChatBot";
 
-const RESUME_URL = "/ABDUL_KASHIM_Updated_Resume.pdf";
+const RESUME_URL = "/Abdul_Kasim_Resume.pdf";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -358,7 +358,7 @@ function Hero() {
             <a href="#projects" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-foreground font-medium hover:shadow-glow-lg transition-all">
               View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="/ABDUL_KASHIM_Updated_Resume.pdf" download className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass hover:bg-surface-2 font-medium transition-colors">
+            <a href="/Abdul_Kasim_Resume.pdf" download className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass hover:bg-surface-2 font-medium transition-colors">
               Resume <Download size={18} />
             </a>
             <div className="flex items-center gap-2 pl-2">
