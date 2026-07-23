@@ -369,7 +369,7 @@ function Hero() {
           </motion.div>
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9 }} className="relative flex justify-center">
-          <div className="relative w-80 h-80 md:w-[26rem] md:h-[26rem]">
+          <div className="relative w-[22rem] h-[22rem] sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem]">
             {/* Ambient glow halo */}
             <motion.div
               animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.85, 0.55] }}
