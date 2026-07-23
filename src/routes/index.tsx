@@ -19,9 +19,9 @@ export const Route = createFileRoute("/")({
   component: Portfolio,
   head: () => ({
     meta: [
-      { title: "Abdul Kashim — AI Engineer & Full Stack Developer" },
-      { name: "description", content: "Portfolio of Abdul Kashim: AI, ML, data analytics and modern web engineering." },
-      { property: "og:title", content: "Abdul Kashim — AI Engineer & Full Stack Developer" },
+      { title: "Abdul Kasim — AI Engineer & Full Stack Developer" },
+      { name: "description", content: "Portfolio of Abdul Kasim: AI, ML, data analytics and modern web engineering." },
+      { property: "og:title", content: "Abdul Kasim — AI Engineer & Full Stack Developer" },
       { property: "og:description", content: "AI, ML, data analytics and modern web engineering." },
     ],
   }),
@@ -287,7 +287,7 @@ function Nav() {
       <nav className="glass rounded-2xl px-4 py-3 flex items-center justify-between">
         <a href="#home" className="flex items-center gap-2 font-display font-bold">
           <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-accent-glow grid place-items-center text-background text-sm">AK</span>
-          <span className="hidden sm:inline">Abdul Kashim</span>
+          <span className="hidden sm:inline">Abdul Kasim</span>
         </a>
         <ul className="hidden md:flex items-center gap-1">
           {NAV.map((n) => (
@@ -377,7 +377,7 @@ function Hero() {
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6">
-            Hi, I'm <span className="text-gradient">Abdul Kashim</span>
+            Hi, I'm <span className="text-gradient">Abdul Kasim</span>
           </motion.h1>
           <motion.h2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }}
             className="text-2xl md:text-3xl font-display text-muted-foreground mb-8 min-h-[2.5rem]">
@@ -411,7 +411,7 @@ function Hero() {
               className="absolute -inset-12 rounded-full border border-dashed border-secondary-accent/20" />
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/40 to-secondary-accent/40 blur-2xl" />
             <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-accent/40 float-slow">
-              <img src={profileAsset.url} alt="Abdul Kashim" className="w-full h-full object-cover" />
+              <img src={profileAsset.url} alt="Abdul Kasim" className="w-full h-full object-cover" />
             </div>
             {["React", "AI/ML", "Python", "TS"].map((t, i) => {
               const angle = (i / 4) * Math.PI * 2;
@@ -1000,7 +1000,7 @@ function Contact() {
         <footer className="mt-24 py-8 border-t border-border-soft grid gap-4 md:grid-cols-3 items-center text-sm text-muted-foreground">
           <div>
             <div className="text-accent font-bold text-2xl">AK.</div>
-            <div className="mt-1">© {new Date().getFullYear()} Abdul Kashim. All rights reserved.</div>
+            <div className="mt-1">© {new Date().getFullYear()} Abdul Kasim. All rights reserved.</div>
           </div>
           <nav className="flex flex-wrap items-center justify-center gap-6">
             <a href="#home" className="hover:text-accent transition-colors">Home</a>
@@ -1009,7 +1009,7 @@ function Contact() {
             <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
           </nav>
           <div className="md:text-right italic">
-            Designed &amp; Developed with <Heart size={14} className="inline text-accent fill-accent -mt-0.5" /> by Abdul Kashim
+            Designed &amp; Developed with <Heart size={14} className="inline text-accent fill-accent -mt-0.5" /> by Abdul Kasim
           </div>
         </footer>
       </motion.div>
