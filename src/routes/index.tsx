@@ -804,6 +804,7 @@ function Portfolio() {
       <Experience />
       <Projects />
       <Skills />
+      <Certifications />
       <Contact />
     </main>
   );
