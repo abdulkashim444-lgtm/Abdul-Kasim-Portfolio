@@ -380,7 +380,7 @@ function Hero() {
             </a>
             <div className="flex items-center gap-2 pl-2">
               <SocialIcon href="https://github.com/abdulkashim444-lgtm" label="GitHub"><Github size={18} /></SocialIcon>
-              <SocialIcon href="https://www.linkedin.com/in/abdul-kashim-567984332" label="LinkedIn"><Linkedin size={18} /></SocialIcon>
+              <SocialIcon href="https://www.linkedin.com/in/abdul-kasim-567984332/" label="LinkedIn"><Linkedin size={18} /></SocialIcon>
               <SocialIcon href="mailto:abdulkashim444@gmail.com" label="Email"><Mail size={18} /></SocialIcon>
             </div>
           </motion.div>
@@ -950,7 +950,7 @@ function Contact() {
             <motion.div variants={rise} className="mt-8 flex items-center gap-3">
               {[
                 { href: "https://github.com/abdulkashim444-lgtm", label: "GitHub", icon: Github },
-                { href: "https://www.linkedin.com/in/abdul-kashim-567984332", label: "LinkedIn", icon: Linkedin },
+                { href: "https://www.linkedin.com/in/abdul-kasim-567984332/", label: "LinkedIn", icon: Linkedin },
                 { href: "https://instagram.com/", label: "Instagram", icon: Instagram },
               ].map(({ href, label, icon: Icon }, i) => (
                 <motion.a
