@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
       { title: "Abdul Kasim — AI Engineer & Full Stack Developer" },
       { name: "description", content: "Portfolio of Abdul Kasim: AI, ML, data analytics and modern web engineering." },
       { property: "og:title", content: "Abdul Kasim — AI Engineer & Full Stack Developer" },
-      { property: "og:description", content: "AI, ML, data analytics and modern web engineering." },
+      { property: "og:description", content: "Portfolio of Abdul Kasim: AI, ML, data analytics and modern web engineering." },
     ],
   }),
 });
