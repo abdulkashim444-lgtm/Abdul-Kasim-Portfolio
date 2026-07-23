@@ -5,6 +5,7 @@ import {
   ArrowRight, Download, Github, Linkedin, Mail, MapPin, ExternalLink,
   Terminal, Code2, Cpu, Trophy, Briefcase, Calendar, X, Award, ShieldCheck,
   Layout, Server, Brain, BarChart, Database, Sparkles, CheckCircle2, LifeBuoy, Send, Loader2,
+  Instagram, Heart,
 } from "lucide-react";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
