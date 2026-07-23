@@ -186,6 +186,9 @@ const PROJECTS: Project[] = [
   },
 ];
 
+const PROJECT_CATEGORIES = ["All", "AI/ML", "Full Stack", "Data", "Computer Vision"] as const;
+
+
 const CERTIFICATIONS = [
   { title: "Machine Learning Specialization", issuer: "Coursera · Stanford / DeepLearning.AI", year: "2026", icon: Brain },
   { title: "Software Engineering Virtual Experience", issuer: "JPMorgan Chase & Co.", year: "2026", icon: ShieldCheck },
