@@ -481,48 +481,214 @@ function Experience() {
   );
 }
 
+function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!project) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [project, onClose]);
+
+  return (
+    <AnimatePresence>
+      {project && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4 md:p-8 bg-background/70 backdrop-blur-md"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass rounded-3xl border border-border-soft"
+          >
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-4 right-4 z-10 w-10 h-10 grid place-items-center rounded-full bg-surface-2/80 hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              <X size={18} />
+            </button>
+            <div className="relative aspect-video overflow-hidden rounded-t-3xl">
+              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+              <div className="absolute bottom-4 left-6 flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-mono font-medium">
+                  {project.category}
+                </span>
+                <span className="px-3 py-1 rounded-full glass text-xs font-mono text-muted-foreground">
+                  {project.year}
+                </span>
+              </div>
+            </div>
+            <div className="p-6 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">{project.title}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">{project.longDescription}</p>
+              <div className="mb-6">
+                <div className="text-xs font-mono uppercase tracking-widest text-accent mb-3">Key Highlights</div>
+                <ul className="space-y-2">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2 text-sm">
+                      <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" />
+                      <span className="text-muted-foreground">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.tech.map((t) => (
+                  <span key={t} className="px-3 py-1 rounded-full bg-surface-2 text-xs font-mono text-muted-foreground">{t}</span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a href={project.github} target="_blank" rel="noreferrer"
+                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass hover:bg-surface-2 font-medium text-sm transition-colors">
+                  <Github size={16} /> View Code
+                </a>
+                <a href={project.live} target="_blank" rel="noreferrer"
+                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground font-medium text-sm hover:shadow-glow transition-shadow">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function Projects() {
+  const [filter, setFilter] = useState<(typeof PROJECT_CATEGORIES)[number]>("All");
+  const [active, setActive] = useState<Project | null>(null);
+  const filtered = filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+
   return (
     <section id="projects" className="py-28 relative">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionTitle eyebrow="Selected Work" title="Featured Projects" sub="A few things I've built recently — real systems, real users, real impact." />
-        <div className="space-y-28">
-          {PROJECTS.map((p, i) => (
-            <motion.article key={p.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }}
-              className={`grid md:grid-cols-2 gap-10 items-center ${i % 2 ? "md:[direction:rtl]" : ""}`}>
-              <div className="md:[direction:ltr] relative group">
-                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-accent/40 to-secondary-accent/40 blur-2xl opacity-40 group-hover:opacity-70 transition-opacity" />
-                <motion.div whileHover={{ y: -6 }} className="relative rounded-3xl overflow-hidden border border-border-soft aspect-video">
-                  <img src={p.image} alt={p.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-                </motion.div>
-              </div>
-              <div className="md:[direction:ltr] space-y-5">
-                <div className="text-xs font-mono uppercase tracking-widest text-accent">Project {String(i + 1).padStart(2, "0")}</div>
-                <h3 className="text-3xl md:text-4xl font-display font-bold">{p.title}</h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">{p.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {p.tech.map((t) => (
-                    <span key={t} className="px-3 py-1 rounded-full glass text-xs font-mono text-muted-foreground">{t}</span>
-                  ))}
-                </div>
-                <div className="flex gap-6 pt-2">
-                  <a href={p.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-medium hover:text-accent transition-colors">
-                    <Github size={18} /> Code
-                  </a>
-                  <a href={p.live} className="inline-flex items-center gap-2 font-medium hover:text-accent transition-colors">
-                    <ExternalLink size={18} /> Live
-                  </a>
-                </div>
-              </div>
-            </motion.article>
-          ))}
+        <SectionTitle eyebrow="Selected Work" title="Featured Projects" sub="Real systems, real users, real impact — filter by category and dive into the details." />
+
+        <div className="flex flex-wrap justify-center gap-2 mb-14">
+          {PROJECT_CATEGORIES.map((c) => {
+            const isActive = filter === c;
+            return (
+              <button
+                key={c}
+                onClick={() => setFilter(c)}
+                className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                  isActive ? "text-accent-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="filter-pill"
+                    className="absolute inset-0 rounded-full bg-accent shadow-glow"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative">{c}</span>
+              </button>
+            );
+          })}
         </div>
-        <div className="mt-20 text-center">
+
+        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((p) => (
+              <motion.article
+                layout
+                key={p.title}
+                initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 220, damping: 24 }}
+                whileHover={{ y: -6 }}
+                onClick={() => setActive(p)}
+                className="group cursor-pointer relative rounded-3xl glass overflow-hidden border border-border-soft hover:border-accent/50 transition-colors"
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img src={p.image} alt={p.title} loading="lazy"
+                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-background/80 backdrop-blur text-[10px] font-mono uppercase tracking-widest text-accent">
+                    {p.category}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="text-lg font-display font-bold group-hover:text-accent transition-colors">{p.title}</h3>
+                    <ArrowRight size={18} className="text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all shrink-0 mt-1" />
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">{p.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.tech.slice(0, 4).map((t) => (
+                      <span key={t} className="px-2 py-0.5 rounded-full bg-surface-2 text-[10px] font-mono text-muted-foreground">{t}</span>
+                    ))}
+                    {p.tech.length > 4 && (
+                      <span className="px-2 py-0.5 rounded-full bg-surface-2 text-[10px] font-mono text-muted-foreground">+{p.tech.length - 4}</span>
+                    )}
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        <div className="mt-16 text-center">
           <a href="https://github.com/abdulkashim444-lgtm" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-2 text-accent font-medium hover:gap-4 transition-all">
             View more on GitHub <ArrowRight size={18} />
           </a>
+        </div>
+      </div>
+
+      <ProjectModal project={active} onClose={() => setActive(null)} />
+    </section>
+  );
+}
+
+function Certifications() {
+  return (
+    <section id="certifications" className="py-28 relative overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-30" />
+      <div className="max-w-7xl mx-auto px-6 relative">
+        <SectionTitle
+          eyebrow="Credentials"
+          title="Certifications & Achievements"
+          sub="Continuous learning across AI, engineering, data and problem solving."
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {CERTIFICATIONS.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6 }}
+              className="group relative p-6 rounded-3xl glass overflow-hidden hover:border-accent/50 transition-colors"
+            >
+              <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-accent/10 blur-2xl group-hover:bg-accent/25 transition" />
+              <div className="relative">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-11 h-11 rounded-2xl bg-accent/15 grid place-items-center">
+                    <c.icon className="text-accent" size={20} />
+                  </div>
+                  <Award size={18} className="text-muted-foreground group-hover:text-accent transition-colors" />
+                </div>
+                <h3 className="font-display font-bold leading-tight mb-2">{c.title}</h3>
+                <div className="text-xs text-muted-foreground mb-3">{c.issuer}</div>
+                <div className="text-[10px] font-mono uppercase tracking-widest text-accent">{c.year}</div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
