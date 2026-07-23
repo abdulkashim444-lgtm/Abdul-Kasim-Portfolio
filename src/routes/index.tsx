@@ -134,24 +134,6 @@ const PROJECTS: Project[] = [
     year: "2026",
   },
   {
-    title: "Kafka Event Streaming Service",
-    category: "Full Stack",
-    description: "Simulated production backend with Kafka streams and REST integrations.",
-    longDescription:
-      "Built during the JPMorgan virtual experience: microservice-style backend consuming and producing Kafka events, exposing REST APIs, and instrumented with structured logging.",
-    highlights: [
-      "Kafka producers + consumers",
-      "REST API integration layer",
-      "Structured logs & metrics",
-      "Java/Spring-style service design",
-    ],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
-    tech: ["Java", "Kafka", "REST", "Spring"],
-    github: "#",
-    live: "#",
-    year: "2026",
-  },
-  {
     title: "Support Desk — Helpdesk Platform",
     category: "Full Stack",
     description: "Full-stack MERN helpdesk with authentication, ticketing and role-based dashboards.",
