@@ -397,7 +397,7 @@ function Hero() {
             {/* Portrait */}
             <div className="absolute inset-2 rounded-full overflow-hidden float-slow shadow-glow-lg ring-1 ring-white/10">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary-accent/20 mix-blend-overlay z-10 pointer-events-none" />
-              <img src={profileAsset.url} alt="Abdul Kasim" className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700" />
+              <img src={profileAsset.url} alt="Abdul Kasim" className="w-full h-full object-cover object-top scale-100 hover:scale-105 transition-transform duration-700" />
               {/* Soft inner highlight */}
               <div className="absolute inset-0 rounded-full pointer-events-none" style={{ boxShadow: "inset 0 40px 60px -20px rgba(255,255,255,0.12), inset 0 -40px 60px -20px rgba(0,0,0,0.35)" }} />
             </div>
