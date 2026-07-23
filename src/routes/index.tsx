@@ -130,8 +130,8 @@ const PROJECTS: Project[] = [
     ],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
     tech: ["Python", "Pandas", "Scikit-learn", "Plotly"],
-    github: "#",
-    live: "#",
+    github: "https://github.com/abdulkashim444-lgtm/Behavioral-customer-segmentation",
+    live: "https://behavioral-customer-segmentation.lovable.app",
     year: "2026",
   },
   {
