@@ -12,6 +12,7 @@ import { Toaster, toast } from "sonner";
 import profileAsset from "@/assets/profile.png.asset.json";
 import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
 import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
+import { ChatBot } from "@/components/ChatBot";
 
 const RESUME_URL = "/ABDUL_KASHIM_Updated_Resume.pdf";
 
@@ -1021,6 +1022,7 @@ function Portfolio() {
       <Skills />
       <Certifications />
       <Contact />
+      <ChatBot />
       <Toaster position="bottom-right" theme="dark" richColors closeButton />
     </main>
   );
