@@ -524,14 +524,47 @@ function Experience() {
 }
 
 function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const titleId = useId();
+  const descId = useId();
+
   useEffect(() => {
     if (!project) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const previouslyFocused = document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
+
+    // Focus the close button when the dialog opens
+    const focusTimer = setTimeout(() => closeBtnRef.current?.focus(), 20);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => {
+      clearTimeout(focusTimer);
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      previouslyFocused?.focus?.();
     };
   }, [project, onClose]);
 
@@ -542,24 +575,31 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           className="fixed inset-0 z-[80] flex items-center justify-center p-4 md:p-8 bg-background/70 backdrop-blur-md"
           onClick={onClose}
+          aria-hidden="false"
         >
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            aria-describedby={descId}
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass rounded-3xl border border-border-soft"
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass rounded-3xl border border-border-soft focus:outline-none"
           >
             <button
+              ref={closeBtnRef}
               onClick={onClose}
-              aria-label="Close"
-              className="absolute top-4 right-4 z-10 w-10 h-10 grid place-items-center rounded-full bg-surface-2/80 hover:bg-accent hover:text-accent-foreground transition-colors"
+              aria-label={`Close ${project.title} details`}
+              className="absolute top-4 right-4 z-10 w-10 h-10 grid place-items-center rounded-full bg-surface-2/80 hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none transition-colors"
             >
               <X size={18} />
             </button>
             <div className="relative aspect-video overflow-hidden rounded-t-3xl">
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              <img src={project.image} alt="" aria-hidden="true" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
               <div className="absolute bottom-4 left-6 flex flex-wrap items-center gap-2">
                 <span className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-mono font-medium">
@@ -571,14 +611,14 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
               </div>
             </div>
             <div className="p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">{project.title}</h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">{project.longDescription}</p>
+              <h3 id={titleId} className="text-2xl md:text-3xl font-display font-bold mb-3">{project.title}</h3>
+              <p id={descId} className="text-muted-foreground leading-relaxed mb-6">{project.longDescription}</p>
               <div className="mb-6">
                 <div className="text-xs font-mono uppercase tracking-widest text-accent mb-3">Key Highlights</div>
                 <ul className="space-y-2">
                   {project.highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" />
+                      <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" aria-hidden="true" />
                       <span className="text-muted-foreground">{h}</span>
                     </li>
                   ))}
