@@ -166,9 +166,25 @@ const PROJECTS: Project[] = [
     live: "#",
     year: "2026",
   },
+  {
+    title: "Support Desk — Helpdesk Platform",
+    category: "Full Stack",
+    description: "Full-stack MERN helpdesk with authentication, ticketing and role-based dashboards.",
+    longDescription:
+      "A production-style customer support platform: users register, raise tickets across products, and track resolution in real time. JWT auth, protected routes, an admin surface, and a polished React UI built for speed and clarity.",
+    highlights: [
+      "JWT authentication with protected API + client routes",
+      "Ticket lifecycle: create, view, close, add notes",
+      "Role-based dashboards for users and support staff",
+      "MongoDB + Express REST API with clean service layer",
+    ],
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1200",
+    tech: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+    github: "https://github.com/abdulkashim444-lgtm/Support-Desk",
+    live: "#",
+    year: "2026",
+  },
 ];
-
-const PROJECT_CATEGORIES = ["All", "AI/ML", "Full Stack", "Data", "Computer Vision"] as const;
 
 const CERTIFICATIONS = [
   { title: "Machine Learning Specialization", issuer: "Coursera · Stanford / DeepLearning.AI", year: "2026", icon: Brain },
