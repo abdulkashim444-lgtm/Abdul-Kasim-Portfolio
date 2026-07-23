@@ -240,6 +240,25 @@ function MessageBubble({ msg }: { msg: Msg }) {
           }`}
           dangerouslySetInnerHTML={{ __html: renderLite(msg.content) }}
         />
+        {!isUser && msg.sources && msg.sources.length > 0 && (
+          <div className="mt-1.5 flex flex-col gap-1 max-w-full">
+            <div className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-muted-foreground/80 font-semibold">
+              <BookOpen size={10} /> Sources
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {msg.sources.map((s, i) => (
+                <span
+                  key={i}
+                  title={s.quote}
+                  className="text-[10px] px-2 py-0.5 rounded-full border border-accent/30 bg-accent/10 text-accent/90 max-w-[240px] truncate"
+                >
+                  <span className="font-semibold">{s.section}</span>
+                  {s.quote && <span className="opacity-70"> — {s.quote}</span>}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         {msg.time && (
           <div className="text-[10px] text-muted-foreground/60 mt-1 px-1">{msg.time}</div>
         )}
