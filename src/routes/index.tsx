@@ -40,21 +40,141 @@ const EXPERIENCES = [
     description: "Customer segmentation and behavior analysis producing strategic recommendations for retail optimization." },
 ];
 
-const PROJECTS = [
-  { title: "AI-Powered Fake News Detection",
-    description: "End-to-end ML + NLP system identifying fraudulent news with 85% accuracy. Real-time RESTful API and responsive React UI.",
+type Project = {
+  title: string;
+  category: "AI/ML" | "Full Stack" | "Data" | "Computer Vision";
+  description: string;
+  longDescription: string;
+  highlights: string[];
+  image: string;
+  tech: string[];
+  github: string;
+  live: string;
+  year: string;
+};
+
+const PROJECTS: Project[] = [
+  {
+    title: "AI-Powered Fake News Detection",
+    category: "AI/ML",
+    description: "End-to-end ML + NLP system identifying fraudulent news with 85% accuracy.",
+    longDescription:
+      "A production-grade NLP pipeline that ingests news articles, extracts linguistic and semantic features, and classifies credibility in real time. Ships with a Flask REST API and a polished React dashboard for analysts.",
+    highlights: [
+      "85% classification accuracy on held-out data",
+      "TF-IDF + transformer embeddings hybrid model",
+      "Sub-200ms inference behind a Flask REST API",
+      "Responsive React dashboard with explainability",
+    ],
     image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=1200",
     tech: ["Python", "Flask", "NLP", "React", "Scikit-learn"],
-    github: "https://github.com/abdulkashim444-lgtm/AI-FakeNews-Detector", live: "#" },
-  { title: "Real-Time Analytics Dashboard",
-    description: "Full-stack analytics processing thousands of daily events. Automated ETL and dynamic D3.js visualizations.",
+    github: "https://github.com/abdulkashim444-lgtm/AI-FakeNews-Detector",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Real-Time Analytics Dashboard",
+    category: "Data",
+    description: "Full-stack analytics processing thousands of daily events with D3.js visualizations.",
+    longDescription:
+      "Event-driven analytics platform with an automated ETL pipeline, PostgreSQL warehouse, and a React + D3.js frontend delivering interactive drilldowns across millions of records.",
+    highlights: [
+      "Automated ETL processing 10k+ events/day",
+      "Dynamic D3.js dashboards with drilldowns",
+      "PostgreSQL warehouse with partitioning",
+      "Role-based access and shareable reports",
+    ],
     image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=1200",
-    tech: ["Python", "Pandas", "D3.js", "React", "PostgreSQL"], github: "#", live: "#" },
-  { title: "Computer Vision Object Detection",
-    description: "Real-time YOLOv8 detection at 20 FPS on standard hardware, TensorRT-optimized inference and streaming pipeline.",
+    tech: ["Python", "Pandas", "D3.js", "React", "PostgreSQL"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Computer Vision Object Detection",
+    category: "Computer Vision",
+    description: "Real-time YOLOv8 detection at 20 FPS on standard hardware with TensorRT.",
+    longDescription:
+      "Optimized YOLOv8 inference pipeline with TensorRT acceleration, streaming video ingestion via OpenCV, and a lightweight React viewer for live annotated feeds.",
+    highlights: [
+      "20 FPS on commodity GPU with TensorRT",
+      "OpenCV streaming ingest + multi-source",
+      "Custom-trained on domain dataset",
+      "Live annotated web viewer",
+    ],
     image: "https://images.unsplash.com/photo-1527430253228-e92688e1ad3a?auto=format&fit=crop&q=80&w=1200",
     tech: ["YOLOv8", "TensorRT", "OpenCV", "Python", "React"],
-    github: "https://github.com/abdulkashim444-lgtm/Computer-Vision-Object-Detection-System", live: "#" },
+    github: "https://github.com/abdulkashim444-lgtm/Computer-Vision-Object-Detection-System",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Customer Segmentation Engine",
+    category: "Data",
+    description: "Unsupervised ML segmenting retail customers to unlock strategic marketing.",
+    longDescription:
+      "Behavioral segmentation of retail customers using K-Means and RFM analysis, surfacing actionable personas and lifetime-value tiers used to drive marketing spend.",
+    highlights: [
+      "RFM + K-Means with silhouette tuning",
+      "Interactive persona explorer",
+      "Lifted campaign ROI in simulations",
+      "Reproducible notebook-to-dashboard flow",
+    ],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+    tech: ["Python", "Pandas", "Scikit-learn", "Plotly"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Modern SaaS Landing Platform",
+    category: "Full Stack",
+    description: "Polished, performant marketing site with CMS-driven content and auth.",
+    longDescription:
+      "A production SaaS front-door: server-rendered React, edge-deployed APIs, CMS-driven content blocks, and integrated authentication — hitting perfect Lighthouse scores.",
+    highlights: [
+      "SSR React on the edge",
+      "100/100 Lighthouse performance",
+      "Auth + billing-ready architecture",
+      "Composable CMS content blocks",
+    ],
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=1200",
+    tech: ["React", "TypeScript", "Node.js", "Tailwind"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Kafka Event Streaming Service",
+    category: "Full Stack",
+    description: "Simulated production backend with Kafka streams and REST integrations.",
+    longDescription:
+      "Built during the JPMorgan virtual experience: microservice-style backend consuming and producing Kafka events, exposing REST APIs, and instrumented with structured logging.",
+    highlights: [
+      "Kafka producers + consumers",
+      "REST API integration layer",
+      "Structured logs & metrics",
+      "Java/Spring-style service design",
+    ],
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+    tech: ["Java", "Kafka", "REST", "Spring"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+];
+
+const PROJECT_CATEGORIES = ["All", "AI/ML", "Full Stack", "Data", "Computer Vision"] as const;
+
+const CERTIFICATIONS = [
+  { title: "Machine Learning Specialization", issuer: "Coursera · Stanford / DeepLearning.AI", year: "2026", icon: Brain },
+  { title: "Software Engineering Virtual Experience", issuer: "JPMorgan Chase & Co.", year: "2026", icon: ShieldCheck },
+  { title: "Data Analytics Virtual Internship", issuer: "Quantium", year: "2026", icon: BarChart },
+  { title: "Artificial Intelligence Internship", issuer: "Alfido Tech", year: "2026", icon: Cpu },
+  { title: "Front End Developer Internship", issuer: "Apexsquare Solutions", year: "2026", icon: Layout },
+  { title: "Problem Solving (2250+ Solved)", issuer: "LeetCode", year: "Ongoing", icon: Terminal },
+  { title: "Python for Data Science", issuer: "IBM · Coursera", year: "2025", icon: Code2 },
+  { title: "Full Stack Web Development", issuer: "Self-Certified · GitHub Portfolio", year: "2025", icon: Server },
 ];
 
 const SKILLS = [
@@ -72,7 +192,8 @@ const MARQUEE = ["React", "TypeScript", "Python", "TensorFlow", "PyTorch", "Node
 const NAV = [
   { id: "home", label: "Home" }, { id: "about", label: "About" },
   { id: "experience", label: "Experience" }, { id: "projects", label: "Projects" },
-  { id: "skills", label: "Skills" }, { id: "contact", label: "Contact" },
+  { id: "skills", label: "Skills" }, { id: "certifications", label: "Certs" },
+  { id: "contact", label: "Contact" },
 ];
 
 function useTypingRoles() {
