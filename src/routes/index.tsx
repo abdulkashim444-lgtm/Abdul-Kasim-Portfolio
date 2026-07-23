@@ -369,26 +369,74 @@ function Hero() {
           </motion.div>
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9 }} className="relative flex justify-center">
-          <div className="relative w-72 h-72 md:w-96 md:h-96">
-            <motion.div animate={{ rotate: 360 }} transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-              className="absolute -inset-6 rounded-full border border-dashed border-accent/30" />
-            <motion.div animate={{ rotate: -360 }} transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
-              className="absolute -inset-12 rounded-full border border-dashed border-secondary-accent/20" />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/40 to-secondary-accent/40 blur-2xl" />
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-accent/40 float-slow">
-              <img src={profileAsset.url} alt="Abdul Kasim" className="w-full h-full object-cover" />
+          <div className="relative w-80 h-80 md:w-[26rem] md:h-[26rem]">
+            {/* Ambient glow halo */}
+            <motion.div
+              animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.85, 0.55] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -inset-10 rounded-full blur-3xl"
+              style={{ background: "radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 55%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--secondary-accent) 45%, transparent), transparent 60%)" }}
+            />
+
+            {/* Rotating conic gradient ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-3 rounded-full p-[2px]"
+              style={{ background: "conic-gradient(from 0deg, var(--accent), var(--accent-glow), var(--secondary-accent), var(--accent))" }}
+            >
+              <div className="w-full h-full rounded-full bg-background" />
+            </motion.div>
+
+            {/* Dashed orbital rings */}
+            <motion.div animate={{ rotate: 360 }} transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-8 rounded-full border border-dashed border-accent/30" />
+            <motion.div animate={{ rotate: -360 }} transition={{ duration: 36, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-16 rounded-full border border-dashed border-secondary-accent/20" />
+
+            {/* Portrait */}
+            <div className="absolute inset-2 rounded-full overflow-hidden float-slow shadow-glow-lg ring-1 ring-white/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary-accent/20 mix-blend-overlay z-10 pointer-events-none" />
+              <img src={profileAsset.url} alt="Abdul Kasim" className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700" />
+              {/* Soft inner highlight */}
+              <div className="absolute inset-0 rounded-full pointer-events-none" style={{ boxShadow: "inset 0 40px 60px -20px rgba(255,255,255,0.12), inset 0 -40px 60px -20px rgba(0,0,0,0.35)" }} />
             </div>
+
+            {/* Sparkle dots along the rim */}
+            {[0, 72, 144, 216, 288].map((deg, i) => (
+              <motion.div
+                key={deg}
+                animate={{ scale: [0.6, 1.2, 0.6], opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 2 + i * 0.3, repeat: Infinity, delay: i * 0.2 }}
+                className="absolute top-1/2 left-1/2 w-2 h-2 rounded-full bg-accent shadow-glow"
+                style={{ transform: `rotate(${deg}deg) translateY(-13.5rem)` }}
+              />
+            ))}
+
+            {/* Floating tech chips */}
             {["React", "AI/ML", "Python", "TS"].map((t, i) => {
-              const angle = (i / 4) * Math.PI * 2;
-              const x = Math.cos(angle) * 200; const yy = Math.sin(angle) * 200;
+              const angle = (i / 4) * Math.PI * 2 - Math.PI / 4;
+              const r = 220;
+              const x = Math.cos(angle) * r; const yy = Math.sin(angle) * r;
               return (
-                <motion.div key={t} animate={{ y: [0, -8, 0] }} transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.3 }}
+                <motion.div key={t} animate={{ y: [0, -10, 0] }} transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.3 }}
                   className="absolute top-1/2 left-1/2 hidden md:block"
                   style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${yy}px))` }}>
-                  <div className="glass px-3 py-1.5 rounded-full text-xs font-mono">{t}</div>
+                  <div className="glass px-3 py-1.5 rounded-full text-xs font-mono shadow-glow border border-accent/30">{t}</div>
                 </motion.div>
               );
             })}
+
+            {/* Status badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 glass px-4 py-2 rounded-full flex items-center gap-2 text-xs font-medium whitespace-nowrap border border-border-soft">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
+              </span>
+              Open to work
+            </motion.div>
           </div>
         </motion.div>
       </div>
