@@ -3,8 +3,8 @@ import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "mot
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight, Download, Github, Linkedin, Mail, MapPin, ExternalLink,
-  Terminal, Code2, Cpu, Trophy, Briefcase, Calendar,
-  Layout, Server, Brain, BarChart, Database, Sparkles,
+  Terminal, Code2, Cpu, Trophy, Briefcase, Calendar, X, Award, ShieldCheck,
+  Layout, Server, Brain, BarChart, Database, Sparkles, CheckCircle2,
 } from "lucide-react";
 import profileImg from "@/assets/profile.jpg";
 
@@ -40,21 +40,141 @@ const EXPERIENCES = [
     description: "Customer segmentation and behavior analysis producing strategic recommendations for retail optimization." },
 ];
 
-const PROJECTS = [
-  { title: "AI-Powered Fake News Detection",
-    description: "End-to-end ML + NLP system identifying fraudulent news with 85% accuracy. Real-time RESTful API and responsive React UI.",
+type Project = {
+  title: string;
+  category: "AI/ML" | "Full Stack" | "Data" | "Computer Vision";
+  description: string;
+  longDescription: string;
+  highlights: string[];
+  image: string;
+  tech: string[];
+  github: string;
+  live: string;
+  year: string;
+};
+
+const PROJECTS: Project[] = [
+  {
+    title: "AI-Powered Fake News Detection",
+    category: "AI/ML",
+    description: "End-to-end ML + NLP system identifying fraudulent news with 85% accuracy.",
+    longDescription:
+      "A production-grade NLP pipeline that ingests news articles, extracts linguistic and semantic features, and classifies credibility in real time. Ships with a Flask REST API and a polished React dashboard for analysts.",
+    highlights: [
+      "85% classification accuracy on held-out data",
+      "TF-IDF + transformer embeddings hybrid model",
+      "Sub-200ms inference behind a Flask REST API",
+      "Responsive React dashboard with explainability",
+    ],
     image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=1200",
     tech: ["Python", "Flask", "NLP", "React", "Scikit-learn"],
-    github: "https://github.com/abdulkashim444-lgtm/AI-FakeNews-Detector", live: "#" },
-  { title: "Real-Time Analytics Dashboard",
-    description: "Full-stack analytics processing thousands of daily events. Automated ETL and dynamic D3.js visualizations.",
+    github: "https://github.com/abdulkashim444-lgtm/AI-FakeNews-Detector",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Real-Time Analytics Dashboard",
+    category: "Data",
+    description: "Full-stack analytics processing thousands of daily events with D3.js visualizations.",
+    longDescription:
+      "Event-driven analytics platform with an automated ETL pipeline, PostgreSQL warehouse, and a React + D3.js frontend delivering interactive drilldowns across millions of records.",
+    highlights: [
+      "Automated ETL processing 10k+ events/day",
+      "Dynamic D3.js dashboards with drilldowns",
+      "PostgreSQL warehouse with partitioning",
+      "Role-based access and shareable reports",
+    ],
     image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=1200",
-    tech: ["Python", "Pandas", "D3.js", "React", "PostgreSQL"], github: "#", live: "#" },
-  { title: "Computer Vision Object Detection",
-    description: "Real-time YOLOv8 detection at 20 FPS on standard hardware, TensorRT-optimized inference and streaming pipeline.",
+    tech: ["Python", "Pandas", "D3.js", "React", "PostgreSQL"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Computer Vision Object Detection",
+    category: "Computer Vision",
+    description: "Real-time YOLOv8 detection at 20 FPS on standard hardware with TensorRT.",
+    longDescription:
+      "Optimized YOLOv8 inference pipeline with TensorRT acceleration, streaming video ingestion via OpenCV, and a lightweight React viewer for live annotated feeds.",
+    highlights: [
+      "20 FPS on commodity GPU with TensorRT",
+      "OpenCV streaming ingest + multi-source",
+      "Custom-trained on domain dataset",
+      "Live annotated web viewer",
+    ],
     image: "https://images.unsplash.com/photo-1527430253228-e92688e1ad3a?auto=format&fit=crop&q=80&w=1200",
     tech: ["YOLOv8", "TensorRT", "OpenCV", "Python", "React"],
-    github: "https://github.com/abdulkashim444-lgtm/Computer-Vision-Object-Detection-System", live: "#" },
+    github: "https://github.com/abdulkashim444-lgtm/Computer-Vision-Object-Detection-System",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Customer Segmentation Engine",
+    category: "Data",
+    description: "Unsupervised ML segmenting retail customers to unlock strategic marketing.",
+    longDescription:
+      "Behavioral segmentation of retail customers using K-Means and RFM analysis, surfacing actionable personas and lifetime-value tiers used to drive marketing spend.",
+    highlights: [
+      "RFM + K-Means with silhouette tuning",
+      "Interactive persona explorer",
+      "Lifted campaign ROI in simulations",
+      "Reproducible notebook-to-dashboard flow",
+    ],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+    tech: ["Python", "Pandas", "Scikit-learn", "Plotly"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Modern SaaS Landing Platform",
+    category: "Full Stack",
+    description: "Polished, performant marketing site with CMS-driven content and auth.",
+    longDescription:
+      "A production SaaS front-door: server-rendered React, edge-deployed APIs, CMS-driven content blocks, and integrated authentication — hitting perfect Lighthouse scores.",
+    highlights: [
+      "SSR React on the edge",
+      "100/100 Lighthouse performance",
+      "Auth + billing-ready architecture",
+      "Composable CMS content blocks",
+    ],
+    image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&q=80&w=1200",
+    tech: ["React", "TypeScript", "Node.js", "Tailwind"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+  {
+    title: "Kafka Event Streaming Service",
+    category: "Full Stack",
+    description: "Simulated production backend with Kafka streams and REST integrations.",
+    longDescription:
+      "Built during the JPMorgan virtual experience: microservice-style backend consuming and producing Kafka events, exposing REST APIs, and instrumented with structured logging.",
+    highlights: [
+      "Kafka producers + consumers",
+      "REST API integration layer",
+      "Structured logs & metrics",
+      "Java/Spring-style service design",
+    ],
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+    tech: ["Java", "Kafka", "REST", "Spring"],
+    github: "#",
+    live: "#",
+    year: "2026",
+  },
+];
+
+const PROJECT_CATEGORIES = ["All", "AI/ML", "Full Stack", "Data", "Computer Vision"] as const;
+
+const CERTIFICATIONS = [
+  { title: "Machine Learning Specialization", issuer: "Coursera · Stanford / DeepLearning.AI", year: "2026", icon: Brain },
+  { title: "Software Engineering Virtual Experience", issuer: "JPMorgan Chase & Co.", year: "2026", icon: ShieldCheck },
+  { title: "Data Analytics Virtual Internship", issuer: "Quantium", year: "2026", icon: BarChart },
+  { title: "Artificial Intelligence Internship", issuer: "Alfido Tech", year: "2026", icon: Cpu },
+  { title: "Front End Developer Internship", issuer: "Apexsquare Solutions", year: "2026", icon: Layout },
+  { title: "Problem Solving (2250+ Solved)", issuer: "LeetCode", year: "Ongoing", icon: Terminal },
+  { title: "Python for Data Science", issuer: "IBM · Coursera", year: "2025", icon: Code2 },
+  { title: "Full Stack Web Development", issuer: "Self-Certified · GitHub Portfolio", year: "2025", icon: Server },
 ];
 
 const SKILLS = [
@@ -72,7 +192,8 @@ const MARQUEE = ["React", "TypeScript", "Python", "TensorFlow", "PyTorch", "Node
 const NAV = [
   { id: "home", label: "Home" }, { id: "about", label: "About" },
   { id: "experience", label: "Experience" }, { id: "projects", label: "Projects" },
-  { id: "skills", label: "Skills" }, { id: "contact", label: "Contact" },
+  { id: "skills", label: "Skills" }, { id: "certifications", label: "Certs" },
+  { id: "contact", label: "Contact" },
 ];
 
 function useTypingRoles() {
@@ -360,48 +481,214 @@ function Experience() {
   );
 }
 
+function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!project) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [project, onClose]);
+
+  return (
+    <AnimatePresence>
+      {project && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[80] flex items-center justify-center p-4 md:p-8 bg-background/70 backdrop-blur-md"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 260, damping: 26 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass rounded-3xl border border-border-soft"
+          >
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-4 right-4 z-10 w-10 h-10 grid place-items-center rounded-full bg-surface-2/80 hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              <X size={18} />
+            </button>
+            <div className="relative aspect-video overflow-hidden rounded-t-3xl">
+              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
+              <div className="absolute bottom-4 left-6 flex flex-wrap items-center gap-2">
+                <span className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-mono font-medium">
+                  {project.category}
+                </span>
+                <span className="px-3 py-1 rounded-full glass text-xs font-mono text-muted-foreground">
+                  {project.year}
+                </span>
+              </div>
+            </div>
+            <div className="p-6 md:p-8">
+              <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">{project.title}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">{project.longDescription}</p>
+              <div className="mb-6">
+                <div className="text-xs font-mono uppercase tracking-widest text-accent mb-3">Key Highlights</div>
+                <ul className="space-y-2">
+                  {project.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2 text-sm">
+                      <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" />
+                      <span className="text-muted-foreground">{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.tech.map((t) => (
+                  <span key={t} className="px-3 py-1 rounded-full bg-surface-2 text-xs font-mono text-muted-foreground">{t}</span>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <a href={project.github} target="_blank" rel="noreferrer"
+                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass hover:bg-surface-2 font-medium text-sm transition-colors">
+                  <Github size={16} /> View Code
+                </a>
+                <a href={project.live} target="_blank" rel="noreferrer"
+                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground font-medium text-sm hover:shadow-glow transition-shadow">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function Projects() {
+  const [filter, setFilter] = useState<(typeof PROJECT_CATEGORIES)[number]>("All");
+  const [active, setActive] = useState<Project | null>(null);
+  const filtered = filter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === filter);
+
   return (
     <section id="projects" className="py-28 relative">
       <div className="max-w-7xl mx-auto px-6">
-        <SectionTitle eyebrow="Selected Work" title="Featured Projects" sub="A few things I've built recently — real systems, real users, real impact." />
-        <div className="space-y-28">
-          {PROJECTS.map((p, i) => (
-            <motion.article key={p.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }}
-              className={`grid md:grid-cols-2 gap-10 items-center ${i % 2 ? "md:[direction:rtl]" : ""}`}>
-              <div className="md:[direction:ltr] relative group">
-                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-accent/40 to-secondary-accent/40 blur-2xl opacity-40 group-hover:opacity-70 transition-opacity" />
-                <motion.div whileHover={{ y: -6 }} className="relative rounded-3xl overflow-hidden border border-border-soft aspect-video">
-                  <img src={p.image} alt={p.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
-                </motion.div>
-              </div>
-              <div className="md:[direction:ltr] space-y-5">
-                <div className="text-xs font-mono uppercase tracking-widest text-accent">Project {String(i + 1).padStart(2, "0")}</div>
-                <h3 className="text-3xl md:text-4xl font-display font-bold">{p.title}</h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">{p.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {p.tech.map((t) => (
-                    <span key={t} className="px-3 py-1 rounded-full glass text-xs font-mono text-muted-foreground">{t}</span>
-                  ))}
-                </div>
-                <div className="flex gap-6 pt-2">
-                  <a href={p.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-medium hover:text-accent transition-colors">
-                    <Github size={18} /> Code
-                  </a>
-                  <a href={p.live} className="inline-flex items-center gap-2 font-medium hover:text-accent transition-colors">
-                    <ExternalLink size={18} /> Live
-                  </a>
-                </div>
-              </div>
-            </motion.article>
-          ))}
+        <SectionTitle eyebrow="Selected Work" title="Featured Projects" sub="Real systems, real users, real impact — filter by category and dive into the details." />
+
+        <div className="flex flex-wrap justify-center gap-2 mb-14">
+          {PROJECT_CATEGORIES.map((c) => {
+            const isActive = filter === c;
+            return (
+              <button
+                key={c}
+                onClick={() => setFilter(c)}
+                className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors ${
+                  isActive ? "text-accent-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="filter-pill"
+                    className="absolute inset-0 rounded-full bg-accent shadow-glow"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative">{c}</span>
+              </button>
+            );
+          })}
         </div>
-        <div className="mt-20 text-center">
+
+        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((p) => (
+              <motion.article
+                layout
+                key={p.title}
+                initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 220, damping: 24 }}
+                whileHover={{ y: -6 }}
+                onClick={() => setActive(p)}
+                className="group cursor-pointer relative rounded-3xl glass overflow-hidden border border-border-soft hover:border-accent/50 transition-colors"
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img src={p.image} alt={p.title} loading="lazy"
+                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-background/80 backdrop-blur text-[10px] font-mono uppercase tracking-widest text-accent">
+                    {p.category}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="text-lg font-display font-bold group-hover:text-accent transition-colors">{p.title}</h3>
+                    <ArrowRight size={18} className="text-muted-foreground group-hover:text-accent group-hover:translate-x-1 transition-all shrink-0 mt-1" />
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">{p.description}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {p.tech.slice(0, 4).map((t) => (
+                      <span key={t} className="px-2 py-0.5 rounded-full bg-surface-2 text-[10px] font-mono text-muted-foreground">{t}</span>
+                    ))}
+                    {p.tech.length > 4 && (
+                      <span className="px-2 py-0.5 rounded-full bg-surface-2 text-[10px] font-mono text-muted-foreground">+{p.tech.length - 4}</span>
+                    )}
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        <div className="mt-16 text-center">
           <a href="https://github.com/abdulkashim444-lgtm" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-2 text-accent font-medium hover:gap-4 transition-all">
             View more on GitHub <ArrowRight size={18} />
           </a>
+        </div>
+      </div>
+
+      <ProjectModal project={active} onClose={() => setActive(null)} />
+    </section>
+  );
+}
+
+function Certifications() {
+  return (
+    <section id="certifications" className="py-28 relative overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-30" />
+      <div className="max-w-7xl mx-auto px-6 relative">
+        <SectionTitle
+          eyebrow="Credentials"
+          title="Certifications & Achievements"
+          sub="Continuous learning across AI, engineering, data and problem solving."
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {CERTIFICATIONS.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6 }}
+              className="group relative p-6 rounded-3xl glass overflow-hidden hover:border-accent/50 transition-colors"
+            >
+              <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-accent/10 blur-2xl group-hover:bg-accent/25 transition" />
+              <div className="relative">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-11 h-11 rounded-2xl bg-accent/15 grid place-items-center">
+                    <c.icon className="text-accent" size={20} />
+                  </div>
+                  <Award size={18} className="text-muted-foreground group-hover:text-accent transition-colors" />
+                </div>
+                <h3 className="font-display font-bold leading-tight mb-2">{c.title}</h3>
+                <div className="text-xs text-muted-foreground mb-3">{c.issuer}</div>
+                <div className="text-[10px] font-mono uppercase tracking-widest text-accent">{c.year}</div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -517,6 +804,7 @@ function Portfolio() {
       <Experience />
       <Projects />
       <Skills />
+      <Certifications />
       <Contact />
     </main>
   );
