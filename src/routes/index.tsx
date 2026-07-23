@@ -409,7 +409,7 @@ function Hero() {
               className="absolute -inset-12 rounded-full border border-dashed border-secondary-accent/20" />
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/40 to-secondary-accent/40 blur-2xl" />
             <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-accent/40 float-slow">
-              <img src={profileImg} alt="Abdul Kashim" className="w-full h-full object-cover" />
+              <img src={profileAsset.url} alt="Abdul Kashim" className="w-full h-full object-cover" />
             </div>
             {["React", "AI/ML", "Python", "TS"].map((t, i) => {
               const angle = (i / 4) * Math.PI * 2;
