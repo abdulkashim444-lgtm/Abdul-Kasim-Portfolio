@@ -76,7 +76,7 @@ const PROJECTS: Project[] = [
     image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=1200",
     tech: ["Python", "Flask", "NLP", "React", "Scikit-learn"],
     github: "https://github.com/abdulkashim444-lgtm/AI-FakeNews-Detector",
-    live: "#",
+    live: "https://super-pie-620efd.netlify.app/",
     year: "2026",
   },
   {
@@ -93,8 +93,8 @@ const PROJECTS: Project[] = [
     ],
     image: analyticsDashboardImg,
     tech: ["Python", "Pandas", "D3.js", "React", "PostgreSQL"],
-    github: "#",
-    live: "#",
+    github: "https://github.com/abdulkashim444-lgtm/Real-time-data-analytics-dashboard",
+    live: "https://resonant-profiterole-1413f2.netlify.app/",
     year: "2026",
   },
   {
@@ -112,7 +112,7 @@ const PROJECTS: Project[] = [
     image: cvObjectDetectionImg,
     tech: ["YOLOv8", "TensorRT", "OpenCV", "Python", "React"],
     github: "https://github.com/abdulkashim444-lgtm/Computer-Vision-Object-Detection-System",
-    live: "#",
+    live: "https://venerable-capybara-7b2f7c.netlify.app/",
     year: "2026",
   },
   {
