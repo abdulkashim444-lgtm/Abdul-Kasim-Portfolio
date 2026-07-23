@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
-import profileImg from "@/assets/profile.jpg";
+import profileAsset from "@/assets/profile.png.asset.json";
 
 const RESUME_URL = "/ABDUL_KASHIM_Updated_Resume.pdf";
 
