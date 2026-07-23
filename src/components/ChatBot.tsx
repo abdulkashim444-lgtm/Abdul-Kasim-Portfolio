@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, X, Send, Loader2, Sparkles, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Sparkles, Bot, User, BookOpen } from "lucide-react";
 
-type Msg = { role: "user" | "assistant"; content: string; time?: string };
+type Source = { section: string; quote: string };
+type Msg = { role: "user" | "assistant"; content: string; time?: string; sources?: Source[] };
 
 const SUGGESTIONS = [
   "Who is Abdul Kasim?",
