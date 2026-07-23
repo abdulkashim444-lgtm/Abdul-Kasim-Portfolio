@@ -369,7 +369,7 @@ function Hero() {
           </motion.div>
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9 }} className="relative flex justify-center">
-          <div className="relative w-80 h-80 md:w-[26rem] md:h-[26rem]">
+          <div className="relative w-[22rem] h-[22rem] sm:w-96 sm:h-96 md:w-[32rem] md:h-[32rem] lg:w-[36rem] lg:h-[36rem]">
             {/* Ambient glow halo */}
             <motion.div
               animate={{ scale: [1, 1.08, 1], opacity: [0.55, 0.85, 0.55] }}
@@ -397,7 +397,7 @@ function Hero() {
             {/* Portrait */}
             <div className="absolute inset-2 rounded-full overflow-hidden float-slow shadow-glow-lg ring-1 ring-white/10">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary-accent/20 mix-blend-overlay z-10 pointer-events-none" />
-              <img src={profileAsset.url} alt="Abdul Kasim" className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-700" />
+              <img src={profileAsset.url} alt="Abdul Kasim" className="w-full h-full object-cover object-top scale-100 hover:scale-105 transition-transform duration-700" />
               {/* Soft inner highlight */}
               <div className="absolute inset-0 rounded-full pointer-events-none" style={{ boxShadow: "inset 0 40px 60px -20px rgba(255,255,255,0.12), inset 0 -40px 60px -20px rgba(0,0,0,0.35)" }} />
             </div>
