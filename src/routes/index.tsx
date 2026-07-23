@@ -1022,6 +1022,7 @@ function Portfolio() {
       <Skills />
       <Certifications />
       <Contact />
+      <Toaster position="bottom-right" theme="dark" richColors closeButton />
     </main>
   );
 }
