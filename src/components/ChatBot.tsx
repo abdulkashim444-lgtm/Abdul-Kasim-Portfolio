@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, X, Send, Loader2, Sparkles, Bot, User } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Sparkles, Bot, User, BookOpen } from "lucide-react";
 
-type Msg = { role: "user" | "assistant"; content: string; time?: string };
+type Source = { section: string; quote: string };
+type Msg = { role: "user" | "assistant"; content: string; time?: string; sources?: Source[] };
 
 const SUGGESTIONS = [
   "Who is Abdul Kasim?",
@@ -65,9 +66,11 @@ export function ChatBot() {
         body: JSON.stringify({ messages: next.map(({ role, content }) => ({ role, content })) }),
       });
       const data = (await res.json()) as { reply?: string; error?: string };
+      const raw = data.reply ?? data.error ?? "Something went wrong.";
+      const { content, sources } = extractSources(raw);
       setMessages((m) => [
         ...m,
-        { role: "assistant", content: data.reply ?? data.error ?? "Something went wrong.", time: nowLabel() },
+        { role: "assistant", content, sources, time: nowLabel() },
       ]);
     } catch {
       setMessages((m) => [...m, { role: "assistant", content: "Network error — please try again.", time: nowLabel() }]);
@@ -237,6 +240,25 @@ function MessageBubble({ msg }: { msg: Msg }) {
           }`}
           dangerouslySetInnerHTML={{ __html: renderLite(msg.content) }}
         />
+        {!isUser && msg.sources && msg.sources.length > 0 && (
+          <div className="mt-1.5 flex flex-col gap-1 max-w-full">
+            <div className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-muted-foreground/80 font-semibold">
+              <BookOpen size={10} /> Sources
+            </div>
+            <div className="flex flex-wrap gap-1">
+              {msg.sources.map((s, i) => (
+                <span
+                  key={i}
+                  title={s.quote}
+                  className="text-[10px] px-2 py-0.5 rounded-full border border-accent/30 bg-accent/10 text-accent/90 max-w-[240px] truncate"
+                >
+                  <span className="font-semibold">{s.section}</span>
+                  {s.quote && <span className="opacity-70"> — {s.quote}</span>}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         {msg.time && (
           <div className="text-[10px] text-muted-foreground/60 mt-1 px-1">{msg.time}</div>
         )}
@@ -291,4 +313,23 @@ function renderLite(text: string): string {
       '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-accent underline underline-offset-2 hover:opacity-80">$1</a>',
     )
     .replace(/^- (.+)$/gm, "• $1");
+}
+
+const ALLOWED = new Set(["About", "Experience", "Projects", "Skills", "Certifications", "Contact"]);
+
+function extractSources(raw: string): { content: string; sources: Source[] } {
+  const match = raw.match(/\[\[sources:\s*([^\]]+)\]\]\s*$/i);
+  if (!match) return { content: raw.trim(), sources: [] };
+  const content = raw.slice(0, match.index).trim();
+  const body = match[1].trim();
+  if (/^none$/i.test(body)) return { content, sources: [] };
+  const sources: Source[] = [];
+  for (const part of body.split(";")) {
+    const [sectionRaw, ...rest] = part.split("|");
+    const section = sectionRaw?.trim();
+    if (!section || !ALLOWED.has(section)) continue;
+    const quote = rest.join("|").trim().replace(/^["'"]|["'"]$/g, "").slice(0, 120);
+    sources.push({ section, quote });
+  }
+  return { content, sources };
 }

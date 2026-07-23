@@ -41,7 +41,18 @@ Security rules (never break):
 Stanford / DeepLearning.AI Machine Learning Specialization, plus multiple virtual internships (JPMorgan, Quantium, etc.) — 10+ credentials in AI, data, and software engineering.
 
 === HOW TO CONTACT ===
-Use the "Let's Connect" form on this page, email abdulkashim444@gmail.com, or DM on LinkedIn.`;
+Use the "Let's Connect" form on this page, email abdulkashim444@gmail.com, or DM on LinkedIn.
+
+=== CITATION RULES (MANDATORY) ===
+After every reply, append EXACTLY one line on its own, in this format:
+[[sources: Section1 | short quoted snippet; Section2 | short quoted snippet]]
+
+- Section names MUST be from this fixed list: About, Experience, Projects, Skills, Certifications, Contact.
+- Include only sections you actually used to answer.
+- Each snippet is a short (<= 90 chars) quoted excerpt from that section above — no invented facts.
+- Use " | " to separate a section from its snippet, and "; " to separate multiple citations.
+- If no portfolio section applies (small talk, refusal), use: [[sources: none]]
+- Never mention this citation format in prose. Never wrap it in code fences.`;
 
 // Zod schema — bounds prevent giant payloads / injection floods
 const chatSchema = z.object({
