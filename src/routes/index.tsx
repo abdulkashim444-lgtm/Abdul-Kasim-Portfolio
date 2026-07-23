@@ -1,12 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useScroll, useSpring, useTransform, AnimatePresence } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
   ArrowRight, Download, Github, Linkedin, Mail, MapPin, ExternalLink,
   Terminal, Code2, Cpu, Trophy, Briefcase, Calendar, X, Award, ShieldCheck,
-  Layout, Server, Brain, BarChart, Database, Sparkles, CheckCircle2,
+  Layout, Server, Brain, BarChart, Database, Sparkles, CheckCircle2, LifeBuoy, Send, Loader2,
 } from "lucide-react";
+import { z } from "zod";
+import { Toaster, toast } from "sonner";
 import profileImg from "@/assets/profile.jpg";
+
+const RESUME_URL = "/ABDUL_KASHIM_Updated_Resume.pdf";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -162,9 +166,28 @@ const PROJECTS: Project[] = [
     live: "#",
     year: "2026",
   },
+  {
+    title: "Support Desk — Helpdesk Platform",
+    category: "Full Stack",
+    description: "Full-stack MERN helpdesk with authentication, ticketing and role-based dashboards.",
+    longDescription:
+      "A production-style customer support platform: users register, raise tickets across products, and track resolution in real time. JWT auth, protected routes, an admin surface, and a polished React UI built for speed and clarity.",
+    highlights: [
+      "JWT authentication with protected API + client routes",
+      "Ticket lifecycle: create, view, close, add notes",
+      "Role-based dashboards for users and support staff",
+      "MongoDB + Express REST API with clean service layer",
+    ],
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1200",
+    tech: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+    github: "https://github.com/abdulkashim444-lgtm/Support-Desk",
+    live: "#",
+    year: "2026",
+  },
 ];
 
 const PROJECT_CATEGORIES = ["All", "AI/ML", "Full Stack", "Data", "Computer Vision"] as const;
+
 
 const CERTIFICATIONS = [
   { title: "Machine Learning Specialization", issuer: "Coursera · Stanford / DeepLearning.AI", year: "2026", icon: Brain },
@@ -277,9 +300,18 @@ function Nav() {
             </li>
           ))}
         </ul>
-        <a href="#contact" className="hidden md:inline-flex px-4 py-2 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:shadow-glow transition-shadow">
-          Let's talk
-        </a>
+        <div className="hidden md:flex items-center gap-2">
+          <a
+            href={RESUME_URL}
+            download
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass hover:border-accent/50 hover:text-accent text-sm font-medium transition-colors"
+          >
+            <Download size={16} /> Resume
+          </a>
+          <a href="#contact" className="inline-flex px-4 py-2 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:shadow-glow transition-shadow">
+            Let's talk
+          </a>
+        </div>
         <button onClick={() => setOpen((v) => !v)} className="md:hidden w-9 h-9 grid place-items-center rounded-lg bg-surface-2" aria-label="Menu">
           <div className="space-y-1.5">
             <span className={`block h-0.5 w-5 bg-foreground transition ${open ? "translate-y-2 rotate-45" : ""}`} />
@@ -299,6 +331,16 @@ function Nav() {
                 </a>
               </li>
             ))}
+            <li className="pt-1">
+              <a
+                onClick={() => setOpen(false)}
+                href={RESUME_URL}
+                download
+                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-accent text-accent-foreground text-sm font-medium"
+              >
+                <Download size={16} /> Download Resume
+              </a>
+            </li>
           </motion.ul>
         )}
       </AnimatePresence>
@@ -482,14 +524,47 @@ function Experience() {
 }
 
 function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const titleId = useId();
+  const descId = useId();
+
   useEffect(() => {
     if (!project) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const previouslyFocused = document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
+
+    // Focus the close button when the dialog opens
+    const focusTimer = setTimeout(() => closeBtnRef.current?.focus(), 20);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key === "Tab" && dialogRef.current) {
+        const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
     window.addEventListener("keydown", onKey);
     return () => {
+      clearTimeout(focusTimer);
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
+      previouslyFocused?.focus?.();
     };
   }, [project, onClose]);
 
@@ -500,24 +575,31 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           className="fixed inset-0 z-[80] flex items-center justify-center p-4 md:p-8 bg-background/70 backdrop-blur-md"
           onClick={onClose}
+          aria-hidden="false"
         >
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            aria-describedby={descId}
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 260, damping: 26 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass rounded-3xl border border-border-soft"
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass rounded-3xl border border-border-soft focus:outline-none"
           >
             <button
+              ref={closeBtnRef}
               onClick={onClose}
-              aria-label="Close"
-              className="absolute top-4 right-4 z-10 w-10 h-10 grid place-items-center rounded-full bg-surface-2/80 hover:bg-accent hover:text-accent-foreground transition-colors"
+              aria-label={`Close ${project.title} details`}
+              className="absolute top-4 right-4 z-10 w-10 h-10 grid place-items-center rounded-full bg-surface-2/80 hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none transition-colors"
             >
               <X size={18} />
             </button>
             <div className="relative aspect-video overflow-hidden rounded-t-3xl">
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              <img src={project.image} alt="" aria-hidden="true" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
               <div className="absolute bottom-4 left-6 flex flex-wrap items-center gap-2">
                 <span className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-mono font-medium">
@@ -529,14 +611,14 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
               </div>
             </div>
             <div className="p-6 md:p-8">
-              <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">{project.title}</h3>
-              <p className="text-muted-foreground leading-relaxed mb-6">{project.longDescription}</p>
+              <h3 id={titleId} className="text-2xl md:text-3xl font-display font-bold mb-3">{project.title}</h3>
+              <p id={descId} className="text-muted-foreground leading-relaxed mb-6">{project.longDescription}</p>
               <div className="mb-6">
                 <div className="text-xs font-mono uppercase tracking-widest text-accent mb-3">Key Highlights</div>
                 <ul className="space-y-2">
                   {project.highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" />
+                      <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" aria-hidden="true" />
                       <span className="text-muted-foreground">{h}</span>
                     </li>
                   ))}
@@ -726,39 +808,173 @@ function Skills() {
   );
 }
 
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Please enter your name").max(80, "Name is too long"),
+  email: z.string().trim().email("Please enter a valid email").max(200, "Email is too long"),
+  subject: z.string().trim().min(2, "Add a short subject").max(120, "Subject is too long"),
+  message: z.string().trim().min(10, "Message needs a bit more detail").max(2000, "Message is too long"),
+});
+type ContactValues = z.infer<typeof contactSchema>;
+type ContactErrors = Partial<Record<keyof ContactValues, string>>;
+
+function ContactForm() {
+  const [values, setValues] = useState<ContactValues>({ name: "", email: "", subject: "", message: "" });
+  const [errors, setErrors] = useState<ContactErrors>({});
+  const [submitting, setSubmitting] = useState(false);
+  const nameId = useId(); const emailId = useId(); const subjectId = useId(); const messageId = useId();
+
+  const update = (k: keyof ContactValues) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setValues((v) => ({ ...v, [k]: e.target.value }));
+    if (errors[k]) setErrors((prev) => ({ ...prev, [k]: undefined }));
+  };
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const parsed = contactSchema.safeParse(values);
+    if (!parsed.success) {
+      const next: ContactErrors = {};
+      for (const issue of parsed.error.issues) {
+        const key = issue.path[0] as keyof ContactValues;
+        if (!next[key]) next[key] = issue.message;
+      }
+      setErrors(next);
+      toast.error("Please fix the highlighted fields.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const { name, email, subject, message } = parsed.data;
+      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+      const mailto = `mailto:abdulkashim444@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      // Open the user's email client with the pre-filled message.
+      window.location.href = mailto;
+      toast.success("Opening your email app — thanks for reaching out!");
+      setValues({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      toast.error("Something went wrong. Please email me directly.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const field = (id: string, label: string, error?: string) => ({
+    "aria-invalid": !!error,
+    "aria-describedby": error ? `${id}-err` : undefined,
+    id,
+    "aria-label": label,
+  });
+
+  return (
+    <form onSubmit={onSubmit} noValidate className="mt-10 grid gap-4 text-left" aria-label="Contact form">
+      <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor={nameId} className="block text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Name</label>
+          <input
+            {...field(nameId, "Name", errors.name)}
+            value={values.name}
+            onChange={update("name")}
+            placeholder="Your name"
+            className="w-full px-4 py-3 rounded-xl bg-surface/60 border border-border-soft placeholder:text-muted-foreground/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 transition"
+          />
+          {errors.name && <p id={`${nameId}-err`} className="mt-1.5 text-xs text-red-400">{errors.name}</p>}
+        </div>
+        <div>
+          <label htmlFor={emailId} className="block text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Email</label>
+          <input
+            {...field(emailId, "Email", errors.email)}
+            type="email"
+            value={values.email}
+            onChange={update("email")}
+            placeholder="you@example.com"
+            className="w-full px-4 py-3 rounded-xl bg-surface/60 border border-border-soft placeholder:text-muted-foreground/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 transition"
+          />
+          {errors.email && <p id={`${emailId}-err`} className="mt-1.5 text-xs text-red-400">{errors.email}</p>}
+        </div>
+      </div>
+      <div>
+        <label htmlFor={subjectId} className="block text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Subject</label>
+        <input
+          {...field(subjectId, "Subject", errors.subject)}
+          value={values.subject}
+          onChange={update("subject")}
+          placeholder="What's this about?"
+          className="w-full px-4 py-3 rounded-xl bg-surface/60 border border-border-soft placeholder:text-muted-foreground/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 transition"
+        />
+        {errors.subject && <p id={`${subjectId}-err`} className="mt-1.5 text-xs text-red-400">{errors.subject}</p>}
+      </div>
+      <div>
+        <label htmlFor={messageId} className="block text-xs font-mono uppercase tracking-widest text-muted-foreground mb-2">Message</label>
+        <textarea
+          {...field(messageId, "Message", errors.message)}
+          value={values.message}
+          onChange={update("message")}
+          rows={5}
+          placeholder="Tell me about your idea, role, or question…"
+          className="w-full px-4 py-3 rounded-xl bg-surface/60 border border-border-soft placeholder:text-muted-foreground/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 transition resize-y"
+        />
+        {errors.message && <p id={`${messageId}-err`} className="mt-1.5 text-xs text-red-400">{errors.message}</p>}
+      </div>
+      <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+        <button
+          type="submit"
+          disabled={submitting}
+          className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-foreground font-medium hover:shadow-glow-lg transition-all disabled:opacity-70"
+        >
+          {submitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+          {submitting ? "Sending…" : "Send message"}
+        </button>
+        <a href="mailto:abdulkashim444@gmail.com" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass hover:bg-surface-2 font-medium transition-colors">
+          <Mail size={18} /> Email directly
+        </a>
+      </div>
+    </form>
+  );
+}
+
 function Contact() {
   return (
     <section id="contact" className="py-28 relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-40" />
       <div className="max-w-4xl mx-auto px-6 relative">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="relative glass rounded-3xl p-10 md:p-16 text-center overflow-hidden">
+          className="relative glass rounded-3xl p-8 md:p-14 overflow-hidden">
           <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[500px] h-[500px] rounded-full bg-accent/20 blur-[120px]" />
-          <div className="relative">
+          <div className="relative text-center">
             <div className="text-xs font-mono uppercase tracking-widest text-accent mb-4">Get in touch</div>
             <h2 className="text-4xl md:text-6xl font-bold mb-6">Let's build something <span className="text-gradient">extraordinary</span>.</h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-10">
-              Have a project in mind, an opportunity, or just want to chat about AI and product? I'd love to hear from you.
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+              Have a project in mind, an opportunity, or just want to chat about AI and product? Drop a note below.
             </p>
-            <div className="flex flex-wrap gap-3 justify-center">
-              <a href="mailto:abdulkashim444@gmail.com" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-foreground font-medium hover:shadow-glow-lg transition-all">
-                <Mail size={18} /> abdulkashim444@gmail.com
+            <div className="mt-6 flex flex-wrap gap-3 justify-center">
+              <a href="https://www.linkedin.com/in/abdul-kashim-567984332" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass hover:border-accent/50 text-sm transition-colors">
+                <Linkedin size={16} /> LinkedIn
               </a>
-              <a href="https://www.linkedin.com/in/abdul-kashim-567984332" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass hover:bg-surface-2 font-medium transition-colors">
-                <Linkedin size={18} /> LinkedIn
+              <a href={RESUME_URL} download className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass hover:border-accent/50 text-sm transition-colors">
+                <Download size={16} /> Resume
               </a>
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-muted-foreground">
+                <MapPin size={14} /> Remote friendly
+              </span>
             </div>
-            <div className="mt-8 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-              <MapPin size={14} /> Available worldwide — remote friendly
-            </div>
+          </div>
+          <div className="relative max-w-2xl mx-auto">
+            <ContactForm />
           </div>
         </motion.div>
         <footer className="mt-16 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>© {new Date().getFullYear()} Abdul Kashim. Crafted with care.</div>
-          <div className="flex items-center gap-4">
-            <a href="https://github.com/abdulkashim444-lgtm" target="_blank" rel="noreferrer" className="hover:text-accent"><Github size={18} /></a>
-            <a href="https://www.linkedin.com/in/abdul-kashim-567984332" target="_blank" rel="noreferrer" className="hover:text-accent"><Linkedin size={18} /></a>
-            <a href="mailto:abdulkashim444@gmail.com" className="hover:text-accent"><Mail size={18} /></a>
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={RESUME_URL}
+              download
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground font-medium hover:shadow-glow transition-shadow"
+            >
+              <Download size={14} /> Download Resume
+            </a>
+            <a href="https://github.com/abdulkashim444-lgtm" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-accent"><Github size={18} /></a>
+            <a href="https://www.linkedin.com/in/abdul-kashim-567984332" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-accent"><Linkedin size={18} /></a>
+            <a href="mailto:abdulkashim444@gmail.com" aria-label="Email" className="hover:text-accent"><Mail size={18} /></a>
+            <a href="#projects" aria-label="Support Desk project" className="hover:text-accent"><LifeBuoy size={18} /></a>
           </div>
         </footer>
       </div>
@@ -806,6 +1022,7 @@ function Portfolio() {
       <Skills />
       <Certifications />
       <Contact />
+      <Toaster position="bottom-right" theme="dark" richColors closeButton />
     </main>
   );
 }
