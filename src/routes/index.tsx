@@ -300,9 +300,18 @@ function Nav() {
             </li>
           ))}
         </ul>
-        <a href="#contact" className="hidden md:inline-flex px-4 py-2 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:shadow-glow transition-shadow">
-          Let's talk
-        </a>
+        <div className="hidden md:flex items-center gap-2">
+          <a
+            href={RESUME_URL}
+            download
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl glass hover:border-accent/50 hover:text-accent text-sm font-medium transition-colors"
+          >
+            <Download size={16} /> Resume
+          </a>
+          <a href="#contact" className="inline-flex px-4 py-2 rounded-xl bg-accent text-accent-foreground text-sm font-medium hover:shadow-glow transition-shadow">
+            Let's talk
+          </a>
+        </div>
         <button onClick={() => setOpen((v) => !v)} className="md:hidden w-9 h-9 grid place-items-center rounded-lg bg-surface-2" aria-label="Menu">
           <div className="space-y-1.5">
             <span className={`block h-0.5 w-5 bg-foreground transition ${open ? "translate-y-2 rotate-45" : ""}`} />
