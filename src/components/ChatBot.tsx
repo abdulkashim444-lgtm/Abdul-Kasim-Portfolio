@@ -314,3 +314,22 @@ function renderLite(text: string): string {
     )
     .replace(/^- (.+)$/gm, "• $1");
 }
+
+const ALLOWED = new Set(["About", "Experience", "Projects", "Skills", "Certifications", "Contact"]);
+
+function extractSources(raw: string): { content: string; sources: Source[] } {
+  const match = raw.match(/\[\[sources:\s*([^\]]+)\]\]\s*$/i);
+  if (!match) return { content: raw.trim(), sources: [] };
+  const content = raw.slice(0, match.index).trim();
+  const body = match[1].trim();
+  if (/^none$/i.test(body)) return { content, sources: [] };
+  const sources: Source[] = [];
+  for (const part of body.split(";")) {
+    const [sectionRaw, ...rest] = part.split("|");
+    const section = sectionRaw?.trim();
+    if (!section || !ALLOWED.has(section)) continue;
+    const quote = rest.join("|").trim().replace(/^["'"]|["'"]$/g, "").slice(0, 120);
+    sources.push({ section, quote });
+  }
+  return { content, sources };
+}
