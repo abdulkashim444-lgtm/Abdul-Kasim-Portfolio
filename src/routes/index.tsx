@@ -91,7 +91,7 @@ const PROJECTS: Project[] = [
       "PostgreSQL warehouse with partitioning",
       "Role-based access and shareable reports",
     ],
-    image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=1200",
+    image: analyticsDashboardImg,
     tech: ["Python", "Pandas", "D3.js", "React", "PostgreSQL"],
     github: "#",
     live: "#",
