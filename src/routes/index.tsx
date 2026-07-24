@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
-import profileCutout from "@/assets/profile-cutout.png";
+import profileAsset from "@/assets/profile.png.asset.json";
 import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
 import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
 import { ChatBot } from "@/components/ChatBot";
@@ -378,25 +378,41 @@ function Hero() {
           </motion.div>
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9 }} className="relative flex justify-center">
-          <div className="relative w-full max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] mx-auto aspect-[3/4] max-h-[min(80vh,44rem)]">
-            {/* Ambient glow halo — adapted for portrait shape */}
+          <div className="relative w-[18rem] h-[18rem] sm:w-[22rem] sm:h-[22rem] md:w-[26rem] md:h-[26rem] lg:w-[30rem] lg:h-[30rem] mx-auto">
+            {/* Ambient pulsing glow */}
             <motion.div
-              animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+              animate={{ scale: [1, 1.08, 1], opacity: [0.5, 0.85, 0.5] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -inset-8 rounded-[3rem] blur-3xl -z-10"
+              className="absolute -inset-10 rounded-full blur-3xl -z-10"
               style={{ background: "radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 55%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--secondary-accent) 45%, transparent), transparent 60%)" }}
             />
 
-            {/* Transparent cutout — object-contain guarantees no crop at any size */}
-            <img
-              src={profileCutout}
-              alt="Abdul Kasim"
-              loading="eager"
-              decoding="async"
-              className="absolute inset-0 w-full h-full object-contain object-bottom float-slow hover:scale-[1.02] transition-transform duration-700 ease-out"
-              style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.55)) drop-shadow(0 0 40px color-mix(in oklab, var(--accent) 30%, transparent))" }}
+            {/* Outer rotating conic ring */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-6 rounded-full opacity-70"
+              style={{ background: "conic-gradient(from 0deg, transparent, color-mix(in oklab, var(--accent) 80%, transparent), transparent 40%, color-mix(in oklab, var(--secondary-accent) 80%, transparent), transparent 80%)", mask: "radial-gradient(circle, transparent 66%, black 68%)", WebkitMask: "radial-gradient(circle, transparent 66%, black 68%)" }}
             />
 
+            {/* Dashed slow ring */}
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+              className="absolute -inset-2 rounded-full border border-dashed border-accent/30"
+            />
+
+            {/* Circular portrait */}
+            <div className="absolute inset-0 rounded-full overflow-hidden border-2 border-accent/40 shadow-[0_25px_80px_-15px_rgba(0,0,0,0.7),0_0_60px_-10px_color-mix(in_oklab,var(--accent)_40%,transparent)]">
+              <img
+                src={profileAsset.url}
+                alt="Abdul Kasim"
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover float-slow hover:scale-[1.03] transition-transform duration-700 ease-out"
+                style={{ objectPosition: "50% 22%" }}
+              />
+            </div>
 
             {/* Floating tech chips */}
             {[
@@ -406,7 +422,7 @@ function Hero() {
               { t: "TS", x: -110, y: 120 },
             ].map(({ t, x, y }, i) => (
               <motion.div key={t} animate={{ y: [0, -10, 0] }} transition={{ duration: 3 + i, repeat: Infinity, delay: i * 0.3 }}
-                className="absolute top-1/2 left-1/2 hidden md:block"
+                className="absolute top-1/2 left-1/2 hidden md:block z-10"
                 style={{ transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))` }}>
                 <div className="glass px-3 py-1.5 rounded-full text-xs font-mono shadow-glow border border-accent/30">{t}</div>
               </motion.div>
@@ -415,7 +431,7 @@ function Hero() {
             {/* Status badge */}
             <motion.div
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
-              className="absolute -bottom-4 left-1/2 -translate-x-1/2 glass px-4 py-2 rounded-full flex items-center gap-2 text-xs font-medium whitespace-nowrap border border-border-soft">
+              className="absolute -bottom-3 left-1/2 -translate-x-1/2 glass px-4 py-2 rounded-full flex items-center gap-2 text-xs font-medium whitespace-nowrap border border-border-soft z-10">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400" />
@@ -424,6 +440,7 @@ function Hero() {
             </motion.div>
           </div>
         </motion.div>
+
       </div>
     </section>
   );
