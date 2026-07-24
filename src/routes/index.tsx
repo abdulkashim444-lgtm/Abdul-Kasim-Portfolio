@@ -53,7 +53,7 @@ const EXPERIENCES: ExperienceItem[] = [
     description: "Delivered exploratory analysis and predictive models with Python, Pandas & Scikit-learn for real-world use cases." },
   { company: "JPMorgan Chase & Co.", role: "Software Engineering Virtual Experience", period: "2026",
     description: "REST API integration, Kafka event streaming and backend services in a simulated production environment." },
-  { company: "Quantium", role: "Data Analytics Virtual Intern", period: "2026",
+  { company: "Blue Stock", role: "Data Analytics Intern", period: "2026",
     description: "Customer segmentation and behavior analysis producing strategic recommendations for retail optimization." },
 ];
 
@@ -169,7 +169,7 @@ const PROJECT_CATEGORIES = ["All", "AI/ML", "Full Stack", "Data", "Computer Visi
 const CERTIFICATIONS = [
   { title: "Machine Learning Specialization", issuer: "Coursera · Stanford / DeepLearning.AI", year: "2026", icon: Brain },
   { title: "Software Engineering Virtual Experience", issuer: "JPMorgan Chase & Co.", year: "2026", icon: ShieldCheck },
-  { title: "Data Analytics Virtual Internship", issuer: "Quantium", year: "2026", icon: BarChart },
+  { title: "Data Analytics Internship", issuer: "Blue Stock", year: "2026", icon: BarChart },
   { title: "Artificial Intelligence Internship", issuer: "Alfido Tech", year: "2026", icon: Cpu },
   { title: "Front End Developer Internship", issuer: "Apexsquare Solutions", year: "2026", icon: Layout },
   { title: "Problem Solving (2250+ Solved)", issuer: "LeetCode", year: "Ongoing", icon: Terminal },
