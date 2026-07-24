@@ -1053,17 +1053,11 @@ function Contact() {
         </div>
 
 
-        <footer className="mt-24 py-8 border-t border-border-soft grid gap-4 md:grid-cols-3 items-center text-sm text-muted-foreground">
+        <footer className="mt-24 py-8 border-t border-border-soft flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>
             <div className="text-accent font-bold text-2xl">AK.</div>
             <div className="mt-1">© {new Date().getFullYear()} Abdul Kasim. All rights reserved.</div>
           </div>
-          <nav className="flex flex-wrap items-center justify-center gap-6">
-            <a href="#home" className="hover:text-accent transition-colors">Home</a>
-            <a href="#about" className="hover:text-accent transition-colors">About</a>
-            <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
-            <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
-          </nav>
         </footer>
       </motion.div>
     </section>
