@@ -689,12 +689,19 @@ function Projects() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle eyebrow="Selected Work" title="Featured Projects" sub="Real systems, real users, real impact — filter by category and dive into the details." />
 
-        <div className="flex flex-wrap justify-center gap-2 mb-14">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
+          className="flex flex-wrap justify-center gap-2 mb-14"
+        >
           {PROJECT_CATEGORIES.map((c) => {
             const isActive = filter === c;
             return (
-              <button
+              <motion.button
                 key={c}
+                variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
                 onClick={() => setFilter(c)}
                 className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors ${
                   isActive ? "text-accent-foreground" : "text-muted-foreground hover:text-foreground"
@@ -708,10 +715,11 @@ function Projects() {
                   />
                 )}
                 <span className="relative">{c}</span>
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
+
 
         <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
