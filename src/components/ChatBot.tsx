@@ -103,7 +103,7 @@ export function ChatBot() {
             </motion.span>
           ) : (
             <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-              <MessageCircle size={22} />
+              <img src={kasimAvatar} alt="Kasim AI" width={44} height={44} className="h-11 w-11 rounded-full object-cover" />
             </motion.span>
           )}
         </AnimatePresence>
