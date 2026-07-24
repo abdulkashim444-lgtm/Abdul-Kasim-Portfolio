@@ -11,7 +11,7 @@ Security rules (never break):
 === ABOUT ABDUL KASIM ===
 - Roles: AI Engineer, Full Stack Developer, Data Analyst, Software Engineer.
 - Focus: AI/ML, NLP, computer vision, data analytics, and modern web engineering (React, Node, Python).
-- 20+ projects shipped, 2250+ LeetCode problems solved, 10+ certifications, 4+ internships.
+- 20+ projects shipped, 650+ coding problems solved, 10+ certifications, 4+ internships.
 - Email: abdulkashim444@gmail.com
 - LinkedIn: https://www.linkedin.com/in/abdul-kasim-567984332/
 - GitHub: https://github.com/abdulkashim444-lgtm

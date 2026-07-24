@@ -32,7 +32,7 @@ const ROLES = ["AI Engineer", "Full Stack Developer", "Data Analyst", "Software 
 
 const STATS = [
   { label: "Projects Completed", value: "20+", icon: Code2 },
-  { label: "LeetCode Solved", value: "2250+", icon: Terminal },
+  { label: "Coding Problems Solved", value: "650+", icon: Terminal },
   { label: "Certifications", value: "10+", icon: Trophy },
   { label: "Internships", value: "4+", icon: Cpu },
 ];
@@ -172,7 +172,7 @@ const CERTIFICATIONS = [
   { title: "Data Analytics Internship", issuer: "Blue Stock", year: "2026", icon: BarChart },
   { title: "Artificial Intelligence Internship", issuer: "Alfido Tech", year: "2026", icon: Cpu },
   { title: "Front End Developer Internship", issuer: "Apexsquare Solutions", year: "2026", icon: Layout },
-  { title: "Problem Solving (2250+ Solved)", issuer: "LeetCode", year: "Ongoing", icon: Terminal },
+  { title: "Problem Solving (650+ Solved)", issuer: "Coding Platforms", year: "Ongoing", icon: Terminal },
   { title: "Python for Data Science", issuer: "IBM · Coursera", year: "2025", icon: Code2 },
   { title: "Full Stack Web Development", issuer: "Self-Certified · GitHub Portfolio", year: "2025", icon: Server },
 ];
@@ -513,7 +513,7 @@ function About() {
             details — how something loads, how it feels, how it scales.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            When I'm not coding, I'm grinding LeetCode (2250+ solved), exploring new ML
+            When I'm not coding, I'm solving coding problems (650+ solved), exploring new ML
             papers, or reverse-engineering great product experiences.
           </p>
         </motion.div>
