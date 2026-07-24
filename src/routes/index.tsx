@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
-import profileAsset from "@/assets/profile.png.asset.json";
+import profileCutout from "@/assets/profile-cutout.png";
 import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
 import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
 import { ChatBot } from "@/components/ChatBot";
@@ -387,20 +387,15 @@ function Hero() {
               style={{ background: "radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 55%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--secondary-accent) 45%, transparent), transparent 60%)" }}
             />
 
-            {/* Portrait card — full-size, no circular crop */}
-            <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-glow-lg ring-1 ring-white/10 bg-surface float-slow">
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary-accent/20 mix-blend-overlay z-10 pointer-events-none" />
-              <img
-                src={profileAsset.url}
-                alt="Abdul Kasim"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-700 ease-out"
-                style={{ objectPosition: "50% 20%" }}
-              />
-              {/* Soft inner highlight */}
-              <div className="absolute inset-0 pointer-events-none" style={{ boxShadow: "inset 0 40px 60px -20px rgba(255,255,255,0.12), inset 0 -40px 60px -20px rgba(0,0,0,0.35)" }} />
-            </div>
+            {/* Transparent cutout — no card, no frame, just the subject */}
+            <img
+              src={profileCutout}
+              alt="Abdul Kasim"
+              loading="eager"
+              decoding="async"
+              className="relative w-full h-auto float-slow hover:scale-[1.02] transition-transform duration-700 ease-out"
+              style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.55)) drop-shadow(0 0 40px color-mix(in oklab, var(--accent) 30%, transparent))" }}
+            />
 
             {/* Decorative corner accents */}
             <motion.div
