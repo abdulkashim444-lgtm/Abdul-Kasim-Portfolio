@@ -37,7 +37,27 @@ const STATS = [
   { label: "Internships", value: "5+", icon: Cpu },
 ];
 
-const EXPERIENCES = [
+type ExperienceItem = {
+  company: string;
+  role: string;
+  period: string;
+  location?: string;
+  description?: string;
+  bullets?: string[];
+};
+
+const EXPERIENCES: ExperienceItem[] = [
+  {
+    company: "Bluestock™🔺",
+    role: "Data Analyst Intern",
+    period: "Apr 2026 - Present · 4 mos",
+    location: "India · Remote",
+    bullets: [
+      "Analyzed complex datasets using Python, SQL, and Excel to derive actionable insights for data-driven decisions.",
+      "Performed data cleaning and transformation to ensure dataset accuracy and consistency.",
+      "Developed interactive dashboards with Power BI and Matplotlib to effectively communicate trends and key metrics.",
+    ],
+  },
   { company: "Apexsquare Solutions", role: "Front End Developer Intern", period: "Apr 2026 – May 2026",
     description: "Built responsive React interfaces, integrated REST APIs and improved perceived performance across product surfaces." },
   { company: "Alfido Tech", role: "Artificial Intelligence Intern", period: "Mar 2026 – Apr 2026",
@@ -531,12 +551,28 @@ function Experience() {
                     <div className="flex items-center gap-2 text-accent mt-1 text-sm font-medium">
                       <Briefcase size={14} /> {e.company}
                     </div>
+                    {e.location && (
+                      <div className="flex items-center gap-2 text-muted-foreground/80 mt-1 text-xs">
+                        <MapPin size={12} /> {e.location}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground text-sm">
                     <Calendar size={14} /> {e.period}
                   </div>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">{e.description}</p>
+                {e.bullets ? (
+                  <ul className="space-y-2">
+                    {e.bullets.map((b, bi) => (
+                      <li key={bi} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-muted-foreground leading-relaxed">{e.description}</p>
+                )}
               </div>
             </motion.article>
           ))}
