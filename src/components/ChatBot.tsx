@@ -277,8 +277,8 @@ function TypingIndicator() {
       animate={{ opacity: 1, y: 0 }}
       className="flex gap-2 items-end"
     >
-      <div className="h-7 w-7 rounded-full grid place-items-center bg-gradient-to-br from-accent to-accent/60 text-accent-foreground shadow-md shadow-accent/20">
-        <Bot size={13} />
+      <div className="h-7 w-7 rounded-full overflow-hidden grid place-items-center bg-gradient-to-br from-accent/30 to-accent/10 ring-1 ring-accent/40 shadow-md shadow-accent/20">
+        <img src={kasimAvatar} alt="" width={28} height={28} className="h-full w-full object-cover" />
       </div>
       <div className="bg-muted/70 border border-border-soft/50 rounded-2xl rounded-tl-md px-4 py-3 flex gap-1 items-center">
         <Dot delay={0} />
