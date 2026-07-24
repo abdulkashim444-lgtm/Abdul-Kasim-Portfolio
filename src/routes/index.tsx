@@ -866,17 +866,30 @@ function ContactForm() {
     setSubmitting(true);
     try {
       const { name, email, message } = parsed.data;
-      const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-      const mailto = `mailto:abdulkashim444@gmail.com?subject=${encodeURIComponent("Hello from your portfolio")}&body=${body}`;
-      window.location.href = mailto;
-      toast.success("Opening your email app — thanks for reaching out!");
+      const res = await fetch("https://formsubmit.co/ajax/abdulkashim444@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+          _subject: `New portfolio message from ${name}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      toast.success("Message sent! I'll get back to you soon.");
       setValues({ name: "", email: "", message: "" });
     } catch {
-      toast.error("Something went wrong. Please email me directly.");
+      const body = encodeURIComponent(`${values.message}\n\n— ${values.name} (${values.email})`);
+      window.location.href = `mailto:abdulkashim444@gmail.com?subject=${encodeURIComponent("Hello from your portfolio")}&body=${body}`;
+      toast.error("Couldn't send directly — opening your email app as fallback.");
     } finally {
       setSubmitting(false);
     }
   };
+
 
   const inputCls = "w-full px-4 py-3.5 rounded-xl bg-surface/40 border border-border-soft placeholder:text-muted-foreground/60 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40 transition";
 
