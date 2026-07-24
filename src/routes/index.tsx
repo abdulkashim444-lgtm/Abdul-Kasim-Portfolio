@@ -763,12 +763,19 @@ function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <div className="mt-16 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-16 text-center"
+        >
           <a href="https://github.com/abdulkashim444-lgtm" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-2 text-accent font-medium hover:gap-4 transition-all">
             View more on GitHub <ArrowRight size={18} />
           </a>
-        </div>
+        </motion.div>
+
       </div>
 
       <ProjectModal project={active} onClose={() => setActive(null)} />
