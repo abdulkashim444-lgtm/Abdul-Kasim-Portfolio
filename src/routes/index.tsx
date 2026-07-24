@@ -34,7 +34,7 @@ const STATS = [
   { label: "Projects Completed", value: "15+", icon: Code2 },
   { label: "LeetCode Solved", value: "2250+", icon: Terminal },
   { label: "Certifications", value: "10+", icon: Trophy },
-  { label: "Internships", value: "4", icon: Cpu },
+  { label: "Internships", value: "5+", icon: Cpu },
 ];
 
 const EXPERIENCES = [
