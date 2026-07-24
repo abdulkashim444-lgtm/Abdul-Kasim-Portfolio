@@ -689,12 +689,19 @@ function Projects() {
       <div className="max-w-7xl mx-auto px-6">
         <SectionTitle eyebrow="Selected Work" title="Featured Projects" sub="Real systems, real users, real impact — filter by category and dive into the details." />
 
-        <div className="flex flex-wrap justify-center gap-2 mb-14">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.06 } } }}
+          className="flex flex-wrap justify-center gap-2 mb-14"
+        >
           {PROJECT_CATEGORIES.map((c) => {
             const isActive = filter === c;
             return (
-              <button
+              <motion.button
                 key={c}
+                variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
                 onClick={() => setFilter(c)}
                 className={`relative px-5 py-2 rounded-full text-sm font-medium transition-colors ${
                   isActive ? "text-accent-foreground" : "text-muted-foreground hover:text-foreground"
@@ -708,10 +715,11 @@ function Projects() {
                   />
                 )}
                 <span className="relative">{c}</span>
-              </button>
+              </motion.button>
             );
           })}
-        </div>
+        </motion.div>
+
 
         <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
@@ -755,12 +763,19 @@ function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <div className="mt-16 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-16 text-center"
+        >
           <a href="https://github.com/abdulkashim444-lgtm" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-2 text-accent font-medium hover:gap-4 transition-all">
             View more on GitHub <ArrowRight size={18} />
           </a>
-        </div>
+        </motion.div>
+
       </div>
 
       <ProjectModal project={active} onClose={() => setActive(null)} />
@@ -826,11 +841,25 @@ function Skills() {
                   <cat.icon className="text-accent" size={22} />
                 </div>
                 <h3 className="text-xl font-display font-bold mb-4">{cat.title}</h3>
-                <div className="flex flex-wrap gap-2">
+                <motion.div
+                  className="flex flex-wrap gap-2"
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-40px" }}
+                  variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } } }}
+                >
                   {cat.items.map((s) => (
-                    <span key={s} className="px-3 py-1 rounded-full bg-surface-2 text-xs font-mono text-muted-foreground">{s}</span>
+                    <motion.span
+                      key={s}
+                      variants={{ hidden: { opacity: 0, y: 8, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1 } }}
+                      whileHover={{ y: -2, scale: 1.05 }}
+                      className="px-3 py-1 rounded-full bg-surface-2 text-xs font-mono text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors cursor-default"
+                    >
+                      {s}
+                    </motion.span>
                   ))}
-                </div>
+                </motion.div>
+
               </div>
             </motion.div>
           ))}
