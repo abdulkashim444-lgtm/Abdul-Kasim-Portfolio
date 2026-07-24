@@ -18,10 +18,10 @@ Security rules (never break):
 - Resume: available via the "Resume" button in the navbar/footer.
 
 === EXPERIENCE ===
+- Blue Stock — Data Analytics Intern (2026): customer segmentation and behavior analysis producing strategic recommendations for retail optimization.
 - Apexsquare Solutions — Front End Developer Intern (Apr–May 2026): React UIs, REST integration, performance.
 - Alfido Tech — AI Intern (Mar–Apr 2026): EDA and predictive models with Python, Pandas, Scikit-learn.
 - JPMorgan Chase & Co. — Software Engineering Virtual Experience (2026): REST APIs, Kafka streaming, backend services.
-- Blue Stock — Data Analytics Intern (2026): customer segmentation and behavior analysis.
 
 === FEATURED PROJECTS ===
 1. AI-Powered Fake News Detection (AI/ML) — Python, Flask, NLP, React, Scikit-learn. 85% accuracy, <200ms inference. GitHub: abdulkashim444-lgtm/AI-FakeNews-Detector. Demo: https://super-pie-620efd.netlify.app/
