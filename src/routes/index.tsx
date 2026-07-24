@@ -534,19 +534,17 @@ function Experience() {
               transition={{ delay: i * 0.05 }} viewport={{ once: true }} className="relative mb-10 group">
               <div className="absolute -left-[27px] md:-left-[7px] top-6 w-4 h-4 rounded-full bg-background border-2 border-accent shadow-[0_0_20px_rgba(255,120,80,0.5)]" />
               <div className="ml-4 p-6 rounded-2xl glass hover:border-accent/40 transition-colors">
-                <div className="flex flex-wrap justify-between gap-3 mb-3">
-                  <div>
-                    <h3 className="text-xl font-display font-bold">{e.role}</h3>
-                    <div className="flex items-center gap-2 text-accent mt-1 text-sm font-medium">
-                      <Briefcase size={14} /> {e.company}
-                    </div>
-                    {e.location && (
-                      <div className="flex items-center gap-2 text-muted-foreground/80 mt-1 text-xs">
-                        <MapPin size={12} /> {e.location}
-                      </div>
-                    )}
+                <div className="mb-3">
+                  <h3 className="text-xl font-display font-bold">{e.role}</h3>
+                  <div className="flex items-center gap-2 text-accent mt-1 text-sm font-medium">
+                    <Briefcase size={14} /> {e.company}
                   </div>
-                  <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                  {e.location && (
+                    <div className="flex items-center gap-2 text-muted-foreground/80 mt-1 text-xs">
+                      <MapPin size={12} /> {e.location}
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2 text-muted-foreground text-sm mt-2">
                     <Calendar size={14} /> {e.period}
                   </div>
                 </div>
