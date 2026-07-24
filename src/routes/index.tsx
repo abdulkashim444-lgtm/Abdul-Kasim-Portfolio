@@ -34,7 +34,7 @@ const STATS = [
   { label: "Projects Completed", value: "20+", icon: Code2 },
   { label: "LeetCode Solved", value: "2250+", icon: Terminal },
   { label: "Certifications", value: "10+", icon: Trophy },
-  { label: "Internships", value: "5+", icon: Cpu },
+  { label: "Internships", value: "4+", icon: Cpu },
 ];
 
 type ExperienceItem = {
@@ -47,17 +47,6 @@ type ExperienceItem = {
 };
 
 const EXPERIENCES: ExperienceItem[] = [
-  {
-    company: "Bluestock™🔺",
-    role: "Data Analyst Intern",
-    period: "Apr 2026 - Present · 4 mos",
-    location: "India · Remote",
-    bullets: [
-      "Analyzed complex datasets using Python, SQL, and Excel to derive actionable insights for data-driven decisions.",
-      "Performed data cleaning and transformation to ensure dataset accuracy and consistency.",
-      "Developed interactive dashboards with Power BI and Matplotlib to effectively communicate trends and key metrics.",
-    ],
-  },
   { company: "Apexsquare Solutions", role: "Front End Developer Intern", period: "Apr 2026 – May 2026",
     description: "Built responsive React interfaces, integrated REST APIs and improved perceived performance across product surfaces." },
   { company: "Alfido Tech", role: "Artificial Intelligence Intern", period: "Mar 2026 – Apr 2026",
