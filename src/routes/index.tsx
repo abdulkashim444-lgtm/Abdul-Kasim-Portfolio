@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
-import profileCutout from "@/assets/profile-cutout.png";
+import profileAsset from "@/assets/profile.png.asset.json";
 import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
 import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
 import { ChatBot } from "@/components/ChatBot";
