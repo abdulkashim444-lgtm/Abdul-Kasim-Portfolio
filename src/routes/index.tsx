@@ -841,11 +841,25 @@ function Skills() {
                   <cat.icon className="text-accent" size={22} />
                 </div>
                 <h3 className="text-xl font-display font-bold mb-4">{cat.title}</h3>
-                <div className="flex flex-wrap gap-2">
+                <motion.div
+                  className="flex flex-wrap gap-2"
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-40px" }}
+                  variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } } }}
+                >
                   {cat.items.map((s) => (
-                    <span key={s} className="px-3 py-1 rounded-full bg-surface-2 text-xs font-mono text-muted-foreground">{s}</span>
+                    <motion.span
+                      key={s}
+                      variants={{ hidden: { opacity: 0, y: 8, scale: 0.9 }, show: { opacity: 1, y: 0, scale: 1 } }}
+                      whileHover={{ y: -2, scale: 1.05 }}
+                      className="px-3 py-1 rounded-full bg-surface-2 text-xs font-mono text-muted-foreground hover:text-accent hover:bg-accent/10 transition-colors cursor-default"
+                    >
+                      {s}
+                    </motion.span>
                   ))}
-                </div>
+                </motion.div>
+
               </div>
             </motion.div>
           ))}
