@@ -226,13 +226,13 @@ function MessageBubble({ msg }: { msg: Msg }) {
       className={`flex gap-2 ${isUser ? "flex-row-reverse" : "flex-row"}`}
     >
       <div
-        className={`h-7 w-7 rounded-full grid place-items-center shrink-0 mt-0.5 ${
+        className={`h-7 w-7 rounded-full grid place-items-center shrink-0 mt-0.5 overflow-hidden ${
           isUser
             ? "bg-muted/60 text-muted-foreground"
-            : "bg-gradient-to-br from-accent to-accent/60 text-accent-foreground shadow-md shadow-accent/20"
+            : "bg-gradient-to-br from-accent/30 to-accent/10 ring-1 ring-accent/40 shadow-md shadow-accent/20"
         }`}
       >
-        {isUser ? <User size={13} /> : <Bot size={13} />}
+        {isUser ? <User size={13} /> : <img src={kasimAvatar} alt="" width={28} height={28} className="h-full w-full object-cover" />}
       </div>
       <div className={`flex flex-col max-w-[80%] ${isUser ? "items-end" : "items-start"}`}>
         <div
