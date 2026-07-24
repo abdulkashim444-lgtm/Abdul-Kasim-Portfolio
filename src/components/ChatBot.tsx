@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, X, Send, Loader2, Sparkles, Bot, User, BookOpen } from "lucide-react";
+import { X, Send, Loader2, Sparkles, User, BookOpen } from "lucide-react";
+import kasimAvatar from "@/assets/kasim-ai-avatar.png";
 
 type Source = { section: string; quote: string };
 type Msg = { role: "user" | "assistant"; content: string; time?: string; sources?: Source[] };
