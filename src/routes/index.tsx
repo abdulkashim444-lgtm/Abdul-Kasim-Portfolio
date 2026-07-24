@@ -378,7 +378,7 @@ function Hero() {
           </motion.div>
         </div>
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9 }} className="relative flex justify-center">
-          <div className="relative w-[18rem] sm:w-[22rem] md:w-[26rem] lg:w-[30rem]">
+          <div className="relative w-full max-w-[18rem] sm:max-w-[22rem] md:max-w-[26rem] lg:max-w-[30rem] mx-auto aspect-[3/4] max-h-[min(80vh,44rem)]">
             {/* Ambient glow halo — adapted for portrait shape */}
             <motion.div
               animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
@@ -387,13 +387,13 @@ function Hero() {
               style={{ background: "radial-gradient(circle at 30% 30%, color-mix(in oklab, var(--accent) 55%, transparent), transparent 60%), radial-gradient(circle at 70% 70%, color-mix(in oklab, var(--secondary-accent) 45%, transparent), transparent 60%)" }}
             />
 
-            {/* Transparent cutout — no card, no frame, just the subject */}
+            {/* Transparent cutout — object-contain guarantees no crop at any size */}
             <img
               src={profileCutout}
               alt="Abdul Kasim"
               loading="eager"
               decoding="async"
-              className="relative w-full h-auto float-slow hover:scale-[1.02] transition-transform duration-700 ease-out"
+              className="absolute inset-0 w-full h-full object-contain object-bottom float-slow hover:scale-[1.02] transition-transform duration-700 ease-out"
               style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.55)) drop-shadow(0 0 40px color-mix(in oklab, var(--accent) 30%, transparent))" }}
             />
 
