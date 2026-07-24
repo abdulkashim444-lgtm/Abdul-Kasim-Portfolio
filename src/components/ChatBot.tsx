@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, X, Send, Loader2, Sparkles, Bot, User, BookOpen } from "lucide-react";
+import { X, Send, Loader2, Sparkles, User, BookOpen } from "lucide-react";
+import kasimAvatar from "@/assets/kasim-ai-avatar.png";
 
 type Source = { section: string; quote: string };
 type Msg = { role: "user" | "assistant"; content: string; time?: string; sources?: Source[] };
@@ -102,7 +103,7 @@ export function ChatBot() {
             </motion.span>
           ) : (
             <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-              <MessageCircle size={22} />
+              <img src={kasimAvatar} alt="Kasim AI" width={44} height={44} className="h-11 w-11 rounded-full object-cover" />
             </motion.span>
           )}
         </AnimatePresence>
@@ -130,8 +131,8 @@ export function ChatBot() {
             <div className="relative p-4 border-b border-border-soft bg-gradient-to-br from-accent/20 via-accent/5 to-transparent">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-accent to-accent/60 grid place-items-center text-accent-foreground shadow-lg shadow-accent/30">
-                    <Bot size={20} />
+                  <div className="h-11 w-11 rounded-2xl overflow-hidden bg-gradient-to-br from-accent/30 to-accent/10 grid place-items-center shadow-lg shadow-accent/30 ring-1 ring-accent/40">
+                    <img src={kasimAvatar} alt="Kasim AI" width={44} height={44} className="h-full w-full object-cover" />
                   </div>
                   <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 ring-2 ring-background" />
                 </div>
@@ -225,13 +226,13 @@ function MessageBubble({ msg }: { msg: Msg }) {
       className={`flex gap-2 ${isUser ? "flex-row-reverse" : "flex-row"}`}
     >
       <div
-        className={`h-7 w-7 rounded-full grid place-items-center shrink-0 mt-0.5 ${
+        className={`h-7 w-7 rounded-full grid place-items-center shrink-0 mt-0.5 overflow-hidden ${
           isUser
             ? "bg-muted/60 text-muted-foreground"
-            : "bg-gradient-to-br from-accent to-accent/60 text-accent-foreground shadow-md shadow-accent/20"
+            : "bg-gradient-to-br from-accent/30 to-accent/10 ring-1 ring-accent/40 shadow-md shadow-accent/20"
         }`}
       >
-        {isUser ? <User size={13} /> : <Bot size={13} />}
+        {isUser ? <User size={13} /> : <img src={kasimAvatar} alt="" width={28} height={28} className="h-full w-full object-cover" />}
       </div>
       <div className={`flex flex-col max-w-[80%] ${isUser ? "items-end" : "items-start"}`}>
         <div
@@ -276,8 +277,8 @@ function TypingIndicator() {
       animate={{ opacity: 1, y: 0 }}
       className="flex gap-2 items-end"
     >
-      <div className="h-7 w-7 rounded-full grid place-items-center bg-gradient-to-br from-accent to-accent/60 text-accent-foreground shadow-md shadow-accent/20">
-        <Bot size={13} />
+      <div className="h-7 w-7 rounded-full overflow-hidden grid place-items-center bg-gradient-to-br from-accent/30 to-accent/10 ring-1 ring-accent/40 shadow-md shadow-accent/20">
+        <img src={kasimAvatar} alt="" width={28} height={28} className="h-full w-full object-cover" />
       </div>
       <div className="bg-muted/70 border border-border-soft/50 rounded-2xl rounded-tl-md px-4 py-3 flex gap-1 items-center">
         <Dot delay={0} />
