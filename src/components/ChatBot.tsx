@@ -160,10 +160,12 @@ export function ChatBot() {
               {loading && <TypingIndicator />}
             </div>
 
-            {/* Suggestions */}
-            {messages.length <= 1 && !loading && (
+            {/* Suggestions — reappear after every assistant answer */}
+            {!loading && messages[messages.length - 1]?.role === "assistant" && (
               <div className="px-4 pb-3">
-                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-semibold">Suggested</div>
+                <div className="text-[10px] uppercase tracking-wider text-muted-foreground mb-2 font-semibold">
+                  {messages.length <= 1 ? "Suggested" : "Suggested follow-ups"}
+                </div>
                 <div className="flex flex-wrap gap-1.5">
                   {SUGGESTIONS.map((s, i) => (
                     <motion.button
