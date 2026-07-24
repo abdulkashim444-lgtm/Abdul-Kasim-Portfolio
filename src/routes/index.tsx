@@ -551,12 +551,28 @@ function Experience() {
                     <div className="flex items-center gap-2 text-accent mt-1 text-sm font-medium">
                       <Briefcase size={14} /> {e.company}
                     </div>
+                    {e.location && (
+                      <div className="flex items-center gap-2 text-muted-foreground/80 mt-1 text-xs">
+                        <MapPin size={12} /> {e.location}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground text-sm">
                     <Calendar size={14} /> {e.period}
                   </div>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">{e.description}</p>
+                {e.bullets ? (
+                  <ul className="space-y-2">
+                    {e.bullets.map((b, bi) => (
+                      <li key={bi} className="flex items-start gap-2 text-sm text-muted-foreground leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-muted-foreground leading-relaxed">{e.description}</p>
+                )}
               </div>
             </motion.article>
           ))}
