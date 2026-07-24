@@ -131,8 +131,8 @@ export function ChatBot() {
             <div className="relative p-4 border-b border-border-soft bg-gradient-to-br from-accent/20 via-accent/5 to-transparent">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-accent to-accent/60 grid place-items-center text-accent-foreground shadow-lg shadow-accent/30">
-                    <Bot size={20} />
+                  <div className="h-11 w-11 rounded-2xl overflow-hidden bg-gradient-to-br from-accent/30 to-accent/10 grid place-items-center shadow-lg shadow-accent/30 ring-1 ring-accent/40">
+                    <img src={kasimAvatar} alt="Kasim AI" width={44} height={44} className="h-full w-full object-cover" />
                   </div>
                   <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 ring-2 ring-background" />
                 </div>
