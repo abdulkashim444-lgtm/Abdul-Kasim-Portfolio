@@ -47,14 +47,14 @@ type ExperienceItem = {
 };
 
 const EXPERIENCES: ExperienceItem[] = [
+  { company: "Blue Stock", role: "Data Analytics Intern", period: "2026",
+    description: "Customer segmentation and behavior analysis producing strategic recommendations for retail optimization." },
   { company: "Apexsquare Solutions", role: "Front End Developer Intern", period: "Apr 2026 – May 2026",
     description: "Built responsive React interfaces, integrated REST APIs and improved perceived performance across product surfaces." },
   { company: "Alfido Tech", role: "Artificial Intelligence Intern", period: "Mar 2026 – Apr 2026",
     description: "Delivered exploratory analysis and predictive models with Python, Pandas & Scikit-learn for real-world use cases." },
   { company: "JPMorgan Chase & Co.", role: "Software Engineering Virtual Experience", period: "2026",
     description: "REST API integration, Kafka event streaming and backend services in a simulated production environment." },
-  { company: "Blue Stock", role: "Data Analytics Intern", period: "2026",
-    description: "Customer segmentation and behavior analysis producing strategic recommendations for retail optimization." },
 ];
 
 type Project = {
