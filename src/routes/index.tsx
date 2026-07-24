@@ -405,7 +405,7 @@ function Hero() {
             {/* Circular portrait */}
             <div className="absolute inset-0 rounded-full overflow-hidden border-2 border-accent/40 shadow-[0_25px_80px_-15px_rgba(0,0,0,0.7),0_0_60px_-10px_color-mix(in_oklab,var(--accent)_40%,transparent)]">
               <img
-                src="/src/assets/profile.png.asset.json"
+                src={profileAsset.url}
                 alt="Abdul Kasim"
                 loading="eager"
                 decoding="async"
