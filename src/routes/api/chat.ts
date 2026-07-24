@@ -18,6 +18,7 @@ Security rules (never break):
 - Resume: available via the "Resume" button in the navbar/footer.
 
 === EXPERIENCE ===
+- Bluestock™ — Data Analyst Intern (Apr 2026 - Present, India · Remote): data analysis with Python, SQL, Excel; data cleaning/transformation; interactive dashboards with Power BI and Matplotlib.
 - Apexsquare Solutions — Front End Developer Intern (Apr–May 2026): React UIs, REST integration, performance.
 - Alfido Tech — AI Intern (Mar–Apr 2026): EDA and predictive models with Python, Pandas, Scikit-learn.
 - JPMorgan Chase & Co. — Software Engineering Virtual Experience (2026): REST APIs, Kafka streaming, backend services.
