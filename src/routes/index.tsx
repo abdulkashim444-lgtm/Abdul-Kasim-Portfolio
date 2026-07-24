@@ -5,7 +5,7 @@ import {
   ArrowRight, Download, Github, Linkedin, Mail, MapPin, ExternalLink,
   Terminal, Code2, Cpu, Trophy, Briefcase, Calendar, X, Award, ShieldCheck,
   Layout, Server, Brain, BarChart, Database, Sparkles, CheckCircle2, LifeBuoy, Send, Loader2,
-  Instagram, Heart,
+  Instagram,
 } from "lucide-react";
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
@@ -1064,9 +1064,6 @@ function Contact() {
             <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
             <a href="#contact" className="hover:text-accent transition-colors">Contact</a>
           </nav>
-          <div className="md:text-right italic">
-            Designed &amp; Developed with <Heart size={14} className="inline text-accent fill-accent -mt-0.5" /> by Abdul Kasim
-          </div>
         </footer>
       </motion.div>
     </section>
