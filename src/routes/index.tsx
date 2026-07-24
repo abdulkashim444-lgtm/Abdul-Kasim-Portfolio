@@ -397,17 +397,6 @@ function Hero() {
               style={{ filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.55)) drop-shadow(0 0 40px color-mix(in oklab, var(--accent) 30%, transparent))" }}
             />
 
-            {/* Decorative corner accents */}
-            <motion.div
-              animate={{ opacity: [0.4, 0.9, 0.4] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-3 -right-3 w-16 h-16 rounded-full border-2 border-accent/40"
-            />
-            <motion.div
-              animate={{ opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -bottom-4 -left-4 w-10 h-10 rounded-full bg-accent/20 blur-sm"
-            />
 
             {/* Floating tech chips */}
             {[
