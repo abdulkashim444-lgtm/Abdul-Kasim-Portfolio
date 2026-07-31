@@ -9,10 +9,13 @@ Designed with a premium user experience, the portfolio showcases production-read
 Whether it's developing AI-powered platforms, building scalable REST APIs, designing real-time analytics dashboards, creating cloud-native microservices, or implementing modern DevOps pipelines, this portfolio represents my continuous journey of learning, innovation, and software craftsmanship.
 
 ---
+
 <img width="1900" height="926" alt="Image" src="https://github.com/user-attachments/assets/9cd19604-5bf1-434b-bd16-e73cd690edc3" />
 
 
 Check out : https://abdul-kasim.lovable.app/
+
+
 ## ✨ Portfolio Highlights
 
 ### 🤖 Artificial Intelligence & Machine Learning
