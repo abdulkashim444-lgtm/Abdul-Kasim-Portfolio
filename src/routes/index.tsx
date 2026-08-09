@@ -158,7 +158,7 @@ const PROJECTS: Project[] = [
     image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=1200",
     tech: ["React", "Node.js", "Express", "MongoDB", "JWT"],
     github: "https://github.com/abdulkashim444-lgtm/Support-Desk",
-    live: "#",
+    live: "https://aksuportdesk.lovable.app/",
     year: "2026",
   },
 ];
