@@ -668,7 +668,7 @@ function ProjectModal({ project, onClose }: { project: Project | null; onClose: 
                 </a>
                 <a href={project.live} target="_blank" rel="noreferrer"
                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-accent-foreground font-medium text-sm hover:shadow-glow transition-shadow">
-                  <ExternalLink size={16} /> Live Demo
+                  <ExternalLink size={16} /> Check Out
                 </a>
               </div>
             </div>
