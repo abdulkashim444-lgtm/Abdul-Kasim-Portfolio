@@ -85,8 +85,8 @@ const PROJECTS: Project[] = [
     ],
     image: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=1200",
     tech: ["Python", "Flask", "NLP", "React", "Scikit-learn"],
-    github: "https://github.com/abdulkashim444-lgtm/AI-FakeNews-Detector",
-    live: "https://super-pie-620efd.netlify.app/",
+    github: "https://github.com/abdulkashim444-lgtm/Real-Time-AI-Fake-News-Detection-Verification-Platform",
+    live: "https://verilens-ai.lovable.app/",
     year: "2026",
   },
   {
