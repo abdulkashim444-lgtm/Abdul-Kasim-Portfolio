@@ -10,6 +10,7 @@ Whether it's developing AI-powered platforms, building scalable REST APIs, desig
 
 ---
 
+
 <img width="1900" height="926" alt="Image" src="https://github.com/user-attachments/assets/9cd19604-5bf1-434b-bd16-e73cd690edc3" />
 
 
@@ -101,6 +102,7 @@ Whether it's developing AI-powered platforms, building scalable REST APIs, desig
 ## 🎯 Mission
 
 My goal is to build innovative, scalable, and impactful software that combines artificial intelligence, modern web technologies, and cloud-native architecture to solve real-world challenges. I am continuously learning, experimenting, and developing production-quality solutions while expanding my expertise in software engineering, AI, data engineering, and distributed systems.
+
 
 This portfolio represents not only the projects I've built but also my commitment to writing clean code, designing robust systems, and delivering high-quality user experiences through modern engineering practices.
 
