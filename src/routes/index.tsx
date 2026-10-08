@@ -10,11 +10,12 @@ import {
 import { z } from "zod";
 import { Toaster, toast } from "sonner";
 import profileAsset from "@/assets/profile.png.asset.json";
+import resumeAsset from "@/assets/resume.pdf.asset.json";
 import analyticsDashboardImg from "@/assets/project-analytics-dashboard.jpg";
 import cvObjectDetectionImg from "@/assets/project-cv-object-detection.jpg";
 import { ChatBot } from "@/components/ChatBot";
 
-const RESUME_URL = "/Abdul_Kasim_Resume.pdf";
+const RESUME_URL = resumeAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -24,6 +25,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Portfolio of Abdul Kasim: AI, ML, data analytics and modern web engineering." },
       { property: "og:title", content: "Abdul Kasim — AI Engineer & Full Stack Developer" },
       { property: "og:description", content: "Portfolio of Abdul Kasim: AI, ML, data analytics and modern web engineering." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
@@ -367,7 +370,7 @@ function Hero() {
             <a href="#projects" className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent text-accent-foreground font-medium hover:shadow-glow-lg transition-all">
               View Projects <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="/Abdul_Kasim_Resume.pdf" download className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass hover:bg-surface-2 font-medium transition-colors">
+            <a href={RESUME_URL} download className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass hover:bg-surface-2 font-medium transition-colors">
               Resume <Download size={18} />
             </a>
             <div className="flex items-center gap-2 pl-2">
