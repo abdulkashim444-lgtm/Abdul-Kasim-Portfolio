@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- All resume buttons use a shared URL from the hosted resume asset pointer so replacing the document updates every download entry point.
